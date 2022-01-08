@@ -1,0 +1,32 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/**"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "ci": "yarn build && yarn lint",
+    "dev": "run-p dev:*",
+    "dev:react-app": "yarn workspace react-app dev",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{.ts,.js,tsx,jsx,json,md,sol}\"",
+    "fix": "run-p fix:*",
+    "fix:react-app": "yarn workspace react-app lint --fix",
+    "lint": "run-p lint:*",
+    "lint:react-app": "yarn workspace react-app lint",
+    "build": "run-p build:*",
+    "build:react-app": "yarn workspace react-app build",
+    "predeploy": "yarn build",
+    "deploy": "yarn firebase deploy"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "firebase-tools": "^9.16.5",
+    "husky": "^7.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.3.2",
+    "prettier-plugin-solidity": "^1.0.0-beta.17"
+  }
+}

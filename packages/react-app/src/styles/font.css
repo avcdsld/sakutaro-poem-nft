@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Sawarabi Mincho";
+  src: local("Sawarabi Mincho"), url(https://fonts.googleapis.com/earlyaccess/sawarabimincho.css) format("truetype");
+}
+
+body {
+  font-family: Sawarabi Mincho, serif;
+}
+
+.p5Canvas {
+  font-family: Sawarabi Mincho, serif;
+}
