@@ -4,11 +4,11 @@ import { injectedConnector } from "../lib/web3";
 export const useWallet = () => {
   const context = useWeb3React();
 
-  const { activate, account, library } = context;
+  const { activate, account, chainId, library } = context;
 
   const connectWallet = () => {
     activate(injectedConnector);
   };
 
-  return [connectWallet, account, library];
+  return [connectWallet, account, chainId, library];
 };

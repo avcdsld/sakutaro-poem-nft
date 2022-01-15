@@ -1,7 +1,8 @@
 import React from "react";
 
 export interface ButtonProps {
-  color?: "gray" | "green" | "red" | "pink";
+  color?: "gray" | "green" | "red" | "pink" | any;
+  textColor?: any;
   rounded?: boolean;
   disabled?: boolean;
   children: React.ReactNode;
@@ -9,7 +10,7 @@ export interface ButtonProps {
   onClick?: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({ color, children, rounded, disabled, className, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ color, textColor, children, rounded, disabled, className, onClick }) => {
   const colorClassName =
     color === "gray"
       ? "bg-gray-400"
@@ -19,14 +20,15 @@ export const Button: React.FC<ButtonProps> = ({ color, children, rounded, disabl
       ? "bg-red-500"
       : color === "pink"
       ? "bg-red-400"
-      : "bg-gray-400";
+      : color;
 
+  const textColorClassName = textColor || "text-white";
   const roundedClassName = rounded ? "rounded-xl" : "";
   const disabledClassName = disabled ? "opacity-25" : "hover:opacity-95";
 
   return (
     <button
-      className={`w-full p-3 focus:outline-none text-center text-white ${colorClassName} ${roundedClassName} ${disabledClassName} ${className}`}
+      className={`w-full p-3 focus:outline-none text-center ${textColorClassName} ${colorClassName} ${roundedClassName} ${disabledClassName} ${className}`}
       disabled={disabled}
       type="button"
       onClick={onClick}

@@ -1,3 +1,5 @@
+import "../styles/globals.css";
+
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
@@ -9,10 +11,12 @@ function getLibrary(provider: any) {
   return library;
 }
 
-export default function () {
+const fn = function () {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <HomeTemplate />
     </Web3ReactProvider>
   );
-}
+};
+
+export default fn;

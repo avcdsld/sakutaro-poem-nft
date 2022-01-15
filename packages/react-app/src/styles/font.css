@@ -1,12 +1,7 @@
-@font-face {
-  font-family: "Sawarabi Mincho";
-  src: local("Sawarabi Mincho"), url(https://fonts.googleapis.com/earlyaccess/sawarabimincho.css) format("truetype");
-}
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat:wght@100;400&display=swap');
 
 body {
-  font-family: Sawarabi Mincho, serif;
-}
-
-.p5Canvas {
-  font-family: Sawarabi Mincho, serif;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.15em;
 }

@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 
 export const Header: React.FC = () => {
   return (
-    <header className={`flex justify-between w-full h-14 px-8 bg-red-400`}>
-      <div className="flex items-center text-white">
-        <Link to="/">NFT Template</Link>
-      </div>
-    </header>
+    <>
+      <header className={`w-full h-14 bg-gray-800 px-8 pt-4`}>
+        <div className="flex items-start text-white">
+          <Link to="/">Sakutaro Poem NFTs</Link>
+        </div>
+      </header>
+    </>
   );
 };

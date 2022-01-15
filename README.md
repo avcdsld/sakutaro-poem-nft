@@ -1,6 +1,4 @@
-# sandbox-collectibles-template
-
-This repo is a sample for NFT collectibles contracts and Home page with mint function.
+# Sakutaro Hagiwara Poem NFT
 
 ## Dev
 
@@ -20,7 +18,3 @@ frontend: localhost:3000
 
 - change information in frontend
   - go to packages/frontend/src/contracts/external_contracts.ts and change nft contract address to deployed address
-
-## P5js
-
-- edit p5js in src/components/organisms/sketch.ts
