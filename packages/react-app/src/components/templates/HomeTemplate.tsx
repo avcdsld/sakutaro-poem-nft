@@ -18,9 +18,19 @@ export const HomeTemplate: React.FC = () => {
       <div className="main text-white bg-black">
         <div className="p-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-            <ComingSoonButton label="Ethereum" max={max} />
-
+            {/* <ComingSoonButton label="Ethereum" max={max} /> */}
             <MintButton
+              chainId={1}
+              label="Ethereum"
+              max={max}
+              chainParams={{ chainId: "0x1" }}
+              jsonRpcProvider={
+                new ethers.providers.JsonRpcProvider("https://mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb")
+              }
+              explorerUrlPrefix="https://etherscan.io/tx/"
+              openseaUrl="https://opensea.io/collection/xxxxxxxx" // TODO:
+            />
+            {/* <MintButton
               chainId={4}
               label="Rinkeby"
               max={max}
@@ -30,7 +40,7 @@ export const HomeTemplate: React.FC = () => {
               }
               explorerUrlPrefix="https://rinkeby.etherscan.io/tx/"
               openseaUrl="https://testnets.opensea.io/collection/xxxxxxxx" // TODO:
-            />
+            /> */}
 
             <ComingSoonButton label="Polygon" max={max} />
             {/* <MintButton

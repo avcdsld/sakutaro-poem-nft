@@ -21,6 +21,8 @@
     "deep-equal": "^2.0.5",
     "ethers": "5.4.1",
     "firebase": "^9.1.2",
+    "keccak256": "^1.0.6",
+    "merkletreejs": "^0.2.27",
     "p5": "^1.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
