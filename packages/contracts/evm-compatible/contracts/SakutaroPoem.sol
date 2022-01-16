@@ -9,18 +9,15 @@
 //
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/utils/introspection/ERC165Storage.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import {ERC721} from "@rari-capital/solmate/src/tokens/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import {Base64} from "./Base64.sol";
 
 interface ITokenURI {
     function tokenURI(uint256 tokenId) external view returns (string memory);
 }
 
-contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC165Storage {
+contract SakutaroPoem is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
@@ -33,15 +30,12 @@ contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC1
     uint256 private seed;
 
     constructor(address _tokenURIContractAddress) ERC721("Sakurato Poem", "SAKU") {
-        _registerInterface(0x80ac58cd); // ERC-721
-        _registerInterface(0x5b5e139f); // ERC-721 Metadata
-        _registerInterface(0x2a55205a); // ERC-2981
         tokenURIContractAddress = _tokenURIContractAddress;
         royaltyReceiver = msg.sender;
         seed = block.timestamp;
     }
 
-    function _baseURI() internal view virtual override returns (string memory) {
+    function _baseURI() internal view virtual returns (string memory) {
         return "";
     }
 
@@ -56,17 +50,21 @@ contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC1
         _safeMint(to, tokenId);
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId) internal override(ERC721) {
         super._burn(tokenId);
     }
 
-    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        uint256 id = (uint160(ownerOf(tokenId)) + seed) % uint256(39);
+    function tokenURI(uint256 tokenId) public view override(ERC721) returns (string memory) {
+        uint256 id = (uint160(ownerOf[tokenId]) + seed) % uint256(39);
         return ITokenURI(tokenURIContractAddress).tokenURI(id);
     }
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC165Storage) returns (bool) {
-        return ERC165Storage.supportsInterface(interfaceId);
+    function supportsInterface(bytes4 interfaceId) public pure virtual override(ERC721) returns (bool) {
+        return
+            interfaceId == 0x01ffc9a7 || // ERC165 Interface ID for ERC165
+            interfaceId == 0x80ac58cd || // ERC165 Interface ID for ERC721
+            interfaceId == 0x5b5e139f || // ERC165 Interface ID for ERC721Metadata
+            interfaceId == 0x2a55205a; // ERC165 Interface ID for ERC2981
     }
 
     // ERC-2981

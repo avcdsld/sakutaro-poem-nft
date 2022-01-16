@@ -102,7 +102,7 @@ describe("SakutaroPoem", function () {
     const SakutaroPoem = await ethers.getContractFactory("SakutaroPoem");
     nftContract = await SakutaroPoem.deploy();
 
-    const elements: any = [];
+    const elements: string[] = [];
     for (let i = 0; i < poemTitles.length; i++) {
       elements.push(poemTitles[i] + poemBodies[i]);
     }
@@ -113,6 +113,10 @@ describe("SakutaroPoem", function () {
     for (let id = 0; id < poemTitles.length; id++) {
       const leaf = keccak256(elements[id]);
       const proof = merkleTree.getHexProof(leaf);
+      merkleTree.verify(proof, leaf, root);
+      if (id === 0) {
+        console.log({ proof, leaf: leaf.toString("hex"), root });
+      }
 
       const tx = await nftContract.mint(buyer.address, id, poemTitles[id], poemBodies[id], proof);
       const txReceipt = await tx.wait();

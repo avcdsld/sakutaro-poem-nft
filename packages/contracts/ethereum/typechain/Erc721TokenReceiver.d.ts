@@ -20,7 +20,7 @@ import { BytesLike } from "@ethersproject/bytes";
 import { Listener, Provider } from "@ethersproject/providers";
 import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
 
-interface Ierc721ReceiverInterface extends ethers.utils.Interface {
+interface Erc721TokenReceiverInterface extends ethers.utils.Interface {
   functions: {
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
   };
@@ -38,7 +38,7 @@ interface Ierc721ReceiverInterface extends ethers.utils.Interface {
   events: {};
 }
 
-export class Ierc721Receiver extends Contract {
+export class Erc721TokenReceiver extends Contract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
@@ -49,13 +49,13 @@ export class Ierc721Receiver extends Contract {
   removeAllListeners(eventName: EventFilter | string): this;
   removeListener(eventName: any, listener: Listener): this;
 
-  interface: Ierc721ReceiverInterface;
+  interface: Erc721TokenReceiverInterface;
 
   functions: {
     onERC721Received(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -63,7 +63,7 @@ export class Ierc721Receiver extends Contract {
     "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
@@ -72,7 +72,7 @@ export class Ierc721Receiver extends Contract {
   onERC721Received(
     operator: string,
     from: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     data: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -80,7 +80,7 @@ export class Ierc721Receiver extends Contract {
   "onERC721Received(address,address,uint256,bytes)"(
     operator: string,
     from: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     data: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
@@ -89,7 +89,7 @@ export class Ierc721Receiver extends Contract {
     onERC721Received(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -97,7 +97,7 @@ export class Ierc721Receiver extends Contract {
     "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -109,7 +109,7 @@ export class Ierc721Receiver extends Contract {
     onERC721Received(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -117,7 +117,7 @@ export class Ierc721Receiver extends Contract {
     "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
@@ -127,7 +127,7 @@ export class Ierc721Receiver extends Contract {
     onERC721Received(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
@@ -135,7 +135,7 @@ export class Ierc721Receiver extends Contract {
     "onERC721Received(address,address,uint256,bytes)"(
       operator: string,
       from: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       data: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;

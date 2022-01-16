@@ -133,56 +133,56 @@ export class Erc721 extends Contract {
 
   functions: {
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     balanceOf(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
     }>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
     }>;
 
     getApproved(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
     }>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -197,14 +197,14 @@ export class Erc721 extends Contract {
     }>;
 
     ownerOf(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -213,15 +213,15 @@ export class Erc721 extends Contract {
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -260,14 +260,14 @@ export class Erc721 extends Contract {
     }>;
 
     tokenURI(
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
     "tokenURI(uint256)"(
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -276,56 +276,53 @@ export class Erc721 extends Contract {
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
   };
 
   approve(
-    to: string,
-    tokenId: BigNumberish,
+    spender: string,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "approve(address,uint256)"(
-    to: string,
-    tokenId: BigNumberish,
+    spender: string,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+  balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   "balanceOf(address)"(
-    owner: string,
+    arg0: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  getApproved(
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  getApproved(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   "getApproved(uint256)"(
-    tokenId: BigNumberish,
+    arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   isApprovedForAll(
-    owner: string,
-    operator: string,
+    arg0: string,
+    arg1: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   "isApprovedForAll(address,address)"(
-    owner: string,
-    operator: string,
+    arg0: string,
+    arg1: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -333,25 +330,25 @@ export class Erc721 extends Contract {
 
   "name()"(overrides?: CallOverrides): Promise<string>;
 
-  ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   "ownerOf(uint256)"(
-    tokenId: BigNumberish,
+    arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: string,
     to: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256,bytes)"(
     from: string,
     to: string,
-    tokenId: BigNumberish,
-    _data: BytesLike,
+    id: BigNumberish,
+    data: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -381,66 +378,63 @@ export class Erc721 extends Contract {
 
   "symbol()"(overrides?: CallOverrides): Promise<string>;
 
-  tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  tokenURI(id: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   "tokenURI(uint256)"(
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   transferFrom(
     from: string,
     to: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "transferFrom(address,address,uint256)"(
     from: string,
     to: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   callStatic: {
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    getApproved(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -448,25 +442,25 @@ export class Erc721 extends Contract {
 
     "name()"(overrides?: CallOverrides): Promise<string>;
 
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -496,24 +490,24 @@ export class Erc721 extends Contract {
 
     "symbol()"(overrides?: CallOverrides): Promise<string>;
 
-    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    tokenURI(id: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     "tokenURI(uint256)"(
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -521,8 +515,8 @@ export class Erc721 extends Contract {
   filters: {
     Approval(
       owner: string | null,
-      approved: string | null,
-      tokenId: BigNumberish | null
+      spender: string | null,
+      id: BigNumberish | null
     ): EventFilter;
 
     ApprovalForAll(
@@ -534,49 +528,49 @@ export class Erc721 extends Contract {
     Transfer(
       from: string | null,
       to: string | null,
-      tokenId: BigNumberish | null
+      id: BigNumberish | null
     ): EventFilter;
   };
 
   estimateGas: {
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getApproved(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -584,28 +578,25 @@ export class Erc721 extends Contract {
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -635,73 +626,70 @@ export class Erc721 extends Contract {
 
     "symbol()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    tokenURI(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    tokenURI(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     "tokenURI(uint256)"(
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     balanceOf(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getApproved(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -710,27 +698,27 @@ export class Erc721 extends Contract {
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     ownerOf(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
@@ -761,26 +749,26 @@ export class Erc721 extends Contract {
     "symbol()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     tokenURI(
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "tokenURI(uint256)"(
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
   };

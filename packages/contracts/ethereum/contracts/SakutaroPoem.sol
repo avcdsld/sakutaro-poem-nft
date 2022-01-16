@@ -9,16 +9,12 @@
 //
 pragma solidity ^0.8.2;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
-import "@openzeppelin/contracts/utils/introspection/ERC165Storage.sol";
+import {ERC721} from "@rari-capital/solmate/src/tokens/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import {Base64} from "./Base64.sol";
 
-contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC165Storage {
+contract SakutaroPoem is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
@@ -34,14 +30,11 @@ contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC1
     uint256 private seed;
 
     constructor() ERC721("Sakurato Poem", "SAKU") {
-        _registerInterface(0x80ac58cd); // ERC-721
-        _registerInterface(0x5b5e139f); // ERC-721 Metadata
-        _registerInterface(0x2a55205a); // ERC-2981
         royaltyReceiver = msg.sender;
         seed = block.timestamp;
     }
 
-    function _baseURI() internal view virtual override returns (string memory) {
+    function _baseURI() internal view virtual returns (string memory) {
         return "";
     }
 
@@ -64,28 +57,24 @@ contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC1
         _safeMint(to, tokenId);
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId) internal override(ERC721) {
         super._burn(tokenId);
     }
 
-    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+    function tokenURI(uint256 tokenId) public view override(ERC721) returns (string memory) {
         uint256 id;
         if (_tokenIdCounter.current() < maxElements) {
             id = tokenId;
         } else {
-            id = (uint160(ownerOf(tokenId)) + seed) % uint256(maxElements);
+            id = (uint160(ownerOf[tokenId]) + seed) % uint256(maxElements);
         }
 
         string[11] memory parts;
         parts[0] = '<svg width="400" height="400" viewBox="0, 0, 410, 410" xmlns="http://www.w3.org/2000/svg">';
-        parts[
-            1
-        ] = '<defs><linearGradient id="grad1" x1="0%" y1="50%" ><stop offset="0%" stop-color="#0f2350" ><animate id="a1" attributeName="stop-color" values="#0f2350; #6a5acd" begin="0; a2.end" dur="3s" /><animate id="a2" attributeName="stop-color" values="#6a5acd; #0f2350" begin="a1.end" dur="3s" /></stop><stop offset="100%" stop-color="#6a5acd" ><animate id="a3" attributeName="stop-color" values="#6a5acd; #0f2350" begin="0; a4.end" dur="3s" /><animate id="a4" attributeName="stop-color" values="#0f2350; #6a5acd" begin="a3.end" dur="3s" /></stop></linearGradient></defs>';
+        parts[1] = '<defs><linearGradient id="grad1" x1="0%" y1="50%" ><stop offset="0%" stop-color="#0f2350" ><animate id="a1" attributeName="stop-color" values="#0f2350; #6a5acd" begin="0; a2.end" dur="3s" /><animate id="a2" attributeName="stop-color" values="#6a5acd; #0f2350" begin="a1.end" dur="3s" /></stop><stop offset="100%" stop-color="#6a5acd" ><animate id="a3" attributeName="stop-color" values="#6a5acd; #0f2350" begin="0; a4.end" dur="3s" /><animate id="a4" attributeName="stop-color" values="#0f2350; #6a5acd" begin="a3.end" dur="3s" /></stop></linearGradient></defs>';
         parts[2] = '<style type="text/css">p {font-family: serif; color: white;}</style>';
         parts[3] = '<rect width="400" height="400" fill="url(#grad1)" />';
-        parts[
-            4
-        ] = '<foreignObject x="25" y="15" width="350" height="370"><p class="shadow" xmlns="http://www.w3.org/1999/xhtml">';
+        parts[4] = '<foreignObject x="25" y="15" width="350" height="370"><p class="shadow" xmlns="http://www.w3.org/1999/xhtml">';
         parts[5] = poemTitles[id];
         parts[6] = '</p><p xmlns="http://www.w3.org/1999/xhtml">';
         parts[7] = poemBodies[id];
@@ -93,40 +82,16 @@ contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC1
         parts[9] = unicode"― 萩原 朔太郎";
         parts[10] = "</p></foreignObject></svg>";
 
-        string memory output = string(
-            abi.encodePacked(
-                parts[0],
-                parts[1],
-                parts[2],
-                parts[3],
-                parts[4],
-                parts[5],
-                parts[6],
-                parts[7],
-                parts[8],
-                parts[9],
-                parts[10]
-            )
-        );
-        string memory json = Base64.encode(
-            bytes(
-                string(
-                    abi.encodePacked(
-                        "{",
-                        '"name": "',
-                        poemTitles[id],
-                        '",',
-                        '"description": "Thirty-nine poems from Sakutaro Hagiwara\'s late self-selected collection \\"Shukumei\\" have been inscribed on Blockchain as full-onchain NFTs. The content of this NFT changes depending on the owner.",',
-                        '"image": "data:image/svg+xml;base64,',
-                        Base64.encode(bytes(output)),
-                        '",',
-                        '"license": "CC-BY 4.0",',
-                        '"creator": "Ara"',
-                        "}"
-                    )
-                )
-            )
-        );
+        string memory output = string(abi.encodePacked(parts[0], parts[1], parts[2], parts[3], parts[4], parts[5], parts[6], parts[7], parts[8], parts[9], parts[10]));
+        string memory json = Base64.encode(bytes(string(abi.encodePacked(
+          "{",
+          '"name": "', poemTitles[id], '",',
+          '"description": "Thirty-nine poems from Sakutaro Hagiwara\'s late self-selected collection \\"Shukumei\\" have been inscribed on Blockchain as full-onchain NFTs. The content of this NFT changes depending on the owner.",',
+          '"image": "data:image/svg+xml;base64,', Base64.encode(bytes(output)), '",',
+          '"license": "CC-BY 4.0",',
+          '"creator": "Ara"',
+          "}"
+        ))));
         output = string(abi.encodePacked("data:application/json;base64,", json));
 
         return output;
@@ -144,8 +109,12 @@ contract SakutaroPoem is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC1
         poemBodies[id] = poemBody;
     }
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721, ERC165Storage) returns (bool) {
-        return ERC165Storage.supportsInterface(interfaceId);
+    function supportsInterface(bytes4 interfaceId) public pure virtual override(ERC721) returns (bool) {
+        return
+            interfaceId == 0x01ffc9a7 || // ERC165 Interface ID for ERC165
+            interfaceId == 0x80ac58cd || // ERC165 Interface ID for ERC721
+            interfaceId == 0x5b5e139f || // ERC165 Interface ID for ERC721Metadata
+            interfaceId == 0x2a55205a; // ERC165 Interface ID for ERC2981
     }
 
     // ERC-2981

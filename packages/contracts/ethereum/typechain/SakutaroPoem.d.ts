@@ -25,18 +25,15 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
     "addPoem(uint256,string,string,bytes32[])": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
-    "burn(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "maxElements()": FunctionFragment;
     "mint(address,uint256,string,string,bytes32[])": FunctionFragment;
     "modulo()": FunctionFragment;
     "name()": FunctionFragment;
-    "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "poemBodies(uint256)": FunctionFragment;
     "poemTitles(uint256)": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
     "royaltyInfo(uint256,uint256)": FunctionFragment;
     "royaltyReceiver()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
@@ -47,7 +44,6 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
     "tokenURI(uint256)": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -59,7 +55,6 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
-  encodeFunctionData(functionFragment: "burn", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "getApproved",
     values: [BigNumberish]
@@ -78,7 +73,6 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "modulo", values?: undefined): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
     values: [BigNumberish]
@@ -90,10 +84,6 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "poemTitles",
     values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "royaltyInfo",
@@ -132,15 +122,10 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
     functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [string]
-  ): string;
 
   decodeFunctionResult(functionFragment: "addPoem", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "burn", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
     data: BytesLike
@@ -156,14 +141,9 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "modulo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poemBodies", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poemTitles", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "royaltyInfo",
     data: BytesLike
@@ -198,21 +178,15 @@ interface SakutaroPoemInterface extends ethers.utils.Interface {
     functionFragment: "transferFrom",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -247,66 +221,56 @@ export class SakutaroPoem extends Contract {
     ): Promise<ContractTransaction>;
 
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     balanceOf(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
     }>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
     }>;
 
-    burn(
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "burn(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
     getApproved(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
     }>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<{
       0: boolean;
@@ -354,23 +318,15 @@ export class SakutaroPoem extends Contract {
       0: string;
     }>;
 
-    owner(overrides?: CallOverrides): Promise<{
-      0: string;
-    }>;
-
-    "owner()"(overrides?: CallOverrides): Promise<{
-      0: string;
-    }>;
-
     ownerOf(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
     }>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
       0: string;
@@ -403,10 +359,6 @@ export class SakutaroPoem extends Contract {
     ): Promise<{
       0: string;
     }>;
-
-    renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
     royaltyInfo(
       arg0: BigNumberish,
@@ -441,15 +393,15 @@ export class SakutaroPoem extends Contract {
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -520,24 +472,14 @@ export class SakutaroPoem extends Contract {
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
   };
@@ -559,53 +501,40 @@ export class SakutaroPoem extends Contract {
   ): Promise<ContractTransaction>;
 
   approve(
-    to: string,
-    tokenId: BigNumberish,
+    spender: string,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "approve(address,uint256)"(
-    to: string,
-    tokenId: BigNumberish,
+    spender: string,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+  balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   "balanceOf(address)"(
-    owner: string,
+    arg0: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  burn(
-    tokenId: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "burn(uint256)"(
-    tokenId: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  getApproved(
-    tokenId: BigNumberish,
-    overrides?: CallOverrides
-  ): Promise<string>;
+  getApproved(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   "getApproved(uint256)"(
-    tokenId: BigNumberish,
+    arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
   isApprovedForAll(
-    owner: string,
-    operator: string,
+    arg0: string,
+    arg1: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   "isApprovedForAll(address,address)"(
-    owner: string,
-    operator: string,
+    arg0: string,
+    arg1: string,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -639,14 +568,10 @@ export class SakutaroPoem extends Contract {
 
   "name()"(overrides?: CallOverrides): Promise<string>;
 
-  owner(overrides?: CallOverrides): Promise<string>;
-
-  "owner()"(overrides?: CallOverrides): Promise<string>;
-
-  ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   "ownerOf(uint256)"(
-    tokenId: BigNumberish,
+    arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -663,10 +588,6 @@ export class SakutaroPoem extends Contract {
     arg0: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  renounceOwnership(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "renounceOwnership()"(overrides?: Overrides): Promise<ContractTransaction>;
 
   royaltyInfo(
     arg0: BigNumberish,
@@ -697,15 +618,15 @@ export class SakutaroPoem extends Contract {
   "safeTransferFrom(address,address,uint256)"(
     from: string,
     to: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256,bytes)"(
     from: string,
     to: string,
-    tokenId: BigNumberish,
-    _data: BytesLike,
+    id: BigNumberish,
+    data: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -753,24 +674,14 @@ export class SakutaroPoem extends Contract {
   transferFrom(
     from: string,
     to: string,
-    tokenId: BigNumberish,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "transferFrom(address,address,uint256)"(
     from: string,
     to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  transferOwnership(
-    newOwner: string,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "transferOwnership(address)"(
-    newOwner: string,
+    id: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -792,50 +703,40 @@ export class SakutaroPoem extends Contract {
     ): Promise<void>;
 
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    burn(tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
-
-    "burn(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    getApproved(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<string>;
+    getApproved(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -869,14 +770,10 @@ export class SakutaroPoem extends Contract {
 
     "name()"(overrides?: CallOverrides): Promise<string>;
 
-    owner(overrides?: CallOverrides): Promise<string>;
-
-    "owner()"(overrides?: CallOverrides): Promise<string>;
-
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -893,10 +790,6 @@ export class SakutaroPoem extends Contract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
-
-    "renounceOwnership()"(overrides?: CallOverrides): Promise<void>;
 
     royaltyInfo(
       arg0: BigNumberish,
@@ -927,15 +820,15 @@ export class SakutaroPoem extends Contract {
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -983,24 +876,14 @@ export class SakutaroPoem extends Contract {
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -1008,8 +891,8 @@ export class SakutaroPoem extends Contract {
   filters: {
     Approval(
       owner: string | null,
-      approved: string | null,
-      tokenId: BigNumberish | null
+      spender: string | null,
+      id: BigNumberish | null
     ): EventFilter;
 
     ApprovalForAll(
@@ -1018,15 +901,10 @@ export class SakutaroPoem extends Contract {
       approved: null
     ): EventFilter;
 
-    OwnershipTransferred(
-      previousOwner: string | null,
-      newOwner: string | null
-    ): EventFilter;
-
     Transfer(
       from: string | null,
       to: string | null,
-      tokenId: BigNumberish | null
+      id: BigNumberish | null
     ): EventFilter;
   };
 
@@ -1048,50 +926,43 @@ export class SakutaroPoem extends Contract {
     ): Promise<BigNumber>;
 
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    burn(tokenId: BigNumberish, overrides?: Overrides): Promise<BigNumber>;
-
-    "burn(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
     getApproved(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1125,17 +996,10 @@ export class SakutaroPoem extends Contract {
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
-    "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
-
-    ownerOf(
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -1159,10 +1023,6 @@ export class SakutaroPoem extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    renounceOwnership(overrides?: Overrides): Promise<BigNumber>;
-
-    "renounceOwnership()"(overrides?: Overrides): Promise<BigNumber>;
-
     royaltyInfo(
       arg0: BigNumberish,
       _value: BigNumberish,
@@ -1182,15 +1042,15 @@ export class SakutaroPoem extends Contract {
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1241,24 +1101,14 @@ export class SakutaroPoem extends Contract {
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
   };
@@ -1281,56 +1131,46 @@ export class SakutaroPoem extends Contract {
     ): Promise<PopulatedTransaction>;
 
     approve(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "approve(address,uint256)"(
-      to: string,
-      tokenId: BigNumberish,
+      spender: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     balanceOf(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "balanceOf(address)"(
-      owner: string,
+      arg0: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    burn(
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "burn(uint256)"(
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
     getApproved(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getApproved(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "isApprovedForAll(address,address)"(
-      owner: string,
-      operator: string,
+      arg0: string,
+      arg1: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1364,17 +1204,13 @@ export class SakutaroPoem extends Contract {
 
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     ownerOf(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "ownerOf(uint256)"(
-      tokenId: BigNumberish,
+      arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1398,10 +1234,6 @@ export class SakutaroPoem extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    renounceOwnership(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "renounceOwnership()"(overrides?: Overrides): Promise<PopulatedTransaction>;
-
     royaltyInfo(
       arg0: BigNumberish,
       _value: BigNumberish,
@@ -1423,15 +1255,15 @@ export class SakutaroPoem extends Contract {
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      _data: BytesLike,
+      id: BigNumberish,
+      data: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
@@ -1486,24 +1318,14 @@ export class SakutaroPoem extends Contract {
     transferFrom(
       from: string,
       to: string,
-      tokenId: BigNumberish,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "transferFrom(address,address,uint256)"(
       from: string,
       to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    transferOwnership(
-      newOwner: string,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "transferOwnership(address)"(
-      newOwner: string,
+      id: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
   };

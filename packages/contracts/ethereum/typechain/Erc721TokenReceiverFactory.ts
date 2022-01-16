@@ -5,14 +5,14 @@
 import { Contract, Signer } from "ethers";
 import { Provider } from "@ethersproject/providers";
 
-import type { Ierc721Receiver } from "./Ierc721Receiver";
+import type { Erc721TokenReceiver } from "./Erc721TokenReceiver";
 
-export class Ierc721ReceiverFactory {
+export class Erc721TokenReceiverFactory {
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): Ierc721Receiver {
-    return new Contract(address, _abi, signerOrProvider) as Ierc721Receiver;
+  ): Erc721TokenReceiver {
+    return new Contract(address, _abi, signerOrProvider) as Erc721TokenReceiver;
   }
 }
 
@@ -31,7 +31,7 @@ const _abi = [
       },
       {
         internalType: "uint256",
-        name: "tokenId",
+        name: "id",
         type: "uint256",
       },
       {

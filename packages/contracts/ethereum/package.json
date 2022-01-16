@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.3.0",
+    "@rari-capital/solmate": "^6.2.0",
     "axios": "^0.21.1",
     "keccak256": "^1.0.6",
     "merkletreejs": "^0.2.27"
