@@ -64,7 +64,7 @@ contract SakutaroPoem is ERC721 {
     function tokenURI(uint256 tokenId) public view override(ERC721) returns (string memory) {
         uint256 id;
         if (_tokenIdCounter.current() < maxElements) {
-            id = tokenId;
+            id = tokenId - 1;
         } else {
             id = (uint160(ownerOf[tokenId]) + seed) % uint256(maxElements);
         }
