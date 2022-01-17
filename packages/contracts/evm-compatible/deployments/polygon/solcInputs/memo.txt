@@ -1,0 +1,2 @@
+SakutaroPoem: 0.8.4
+TokenURI: 0.8.7
