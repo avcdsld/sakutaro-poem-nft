@@ -1,0 +1,9 @@
+{
+  "name": "avalanche-verify",
+  "version": "1.0.0",
+  "main": "varify.js",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}

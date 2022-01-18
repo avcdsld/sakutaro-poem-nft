@@ -57,8 +57,8 @@ module.exports = {
     arbitrum: {
       url: "https://arbitrum-mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb",
       accounts: [privateKey],
-      gas: 2100000,
-      gasPrice: 8000000000,
+      gas: 89000000,
+      gasPrice: 1570000000,
     },
     arbitrumtestnet: {
       url: "https://arbitrum-rinkeby.infura.io/v3/6ae5bd1d600f40048725736711ef4acb",
@@ -69,8 +69,8 @@ module.exports = {
     shiden: {
       url: "https://rpc.shiden.astar.network:8545",
       accounts: [privateKey],
-      gas: 2100000,
-      gasPrice: 8000000000,
+      gas: 13000000,
+      gasPrice: 1000000000,
     },
     shibuya: {
       url: "https://rpc.shibuya.astar.network:8545",
@@ -81,8 +81,8 @@ module.exports = {
     optimism: {
       url: "https://optimism-mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb",
       accounts: [privateKey],
-      gas: 2100000,
-      gasPrice: 8000000000,
+      gas: 4000000,
+      gasPrice: 1000000,
     },
     optimismtestnet: {
       url: "https://optimism-kovan.infura.io/v3/6ae5bd1d600f40048725736711ef4acb",
@@ -93,8 +93,8 @@ module.exports = {
     avalanche: {
       url: "https://api.avax.network/ext/bc/C/rpc",
       accounts: [privateKey],
-      gas: 2100000,
-      gasPrice: 8000000000,
+      gas: 4000000,
+      gasPrice: 25100000000,
     },
     avalanchetestnet: {
       url: "https://api.avax-test.network/ext/bc/C/rpc",

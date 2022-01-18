@@ -11,7 +11,6 @@ pragma solidity ^0.8.2;
 
 import {ERC721} from "@rari-capital/solmate/src/tokens/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import {Base64} from "./Base64.sol";
 
 interface ITokenURI {
     function tokenURI(uint256 tokenId) external view returns (string memory);
