@@ -1061,7 +1061,7 @@ const nftAbiForEth = [
 const contractsInfo: any = {
   1: {
     contracts: {
-      nft: { address: "0xa87abf6854207075e65d16cf86a8ece1216ea973", abi: nftAbiForEth },
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbiForEth },
     },
   },
   4: {
@@ -1071,7 +1071,7 @@ const contractsInfo: any = {
   },
   137: {
     contracts: {
-      nft: { address: "", abi: nftAbi },
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbi },
     },
   },
   80001: {
@@ -1082,7 +1082,7 @@ const contractsInfo: any = {
   },
   56: {
     contracts: {
-      nft: { address: "", abi: nftAbi },
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbi },
     },
   },
   97: {
@@ -1092,7 +1092,7 @@ const contractsInfo: any = {
   },
   42161: {
     contracts: {
-      nft: { address: "", abi: nftAbi },
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbiForEth },
     },
   },
   421611: {
@@ -1102,12 +1102,22 @@ const contractsInfo: any = {
   },
   336: {
     contracts: {
-      nft: { address: "0x6750D3Fd143e91083D4ff10Dc659Efc517c3EC85", abi: nftAbi },
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbi },
     },
   },
   81: {
     contracts: {
       nft: { address: "0x6750D3Fd143e91083D4ff10Dc659Efc517c3EC85", abi: nftAbi },
+    },
+  },
+  10: {
+    contracts: {
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbiForEth },
+    },
+  },
+  43114: {
+    contracts: {
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbiForEth },
     },
   },
 };

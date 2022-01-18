@@ -5,9 +5,10 @@ import { useNFT } from "../../hooks/useContract";
 import { Text } from "../atoms/Text";
 import { Button } from "../atoms/Button";
 import { getNFTContract } from "../../lib/web3";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { MerkleTree } from "merkletreejs";
 import keccak256 from "keccak256";
-
 declare global {
   interface Window {
     ethereum?: any;
@@ -106,6 +107,7 @@ export const MintButton: React.FC<{
   jsonRpcProvider: any;
   explorerUrlPrefix?: string;
   openseaUrl?: string;
+  externalUrl?: string;
 }> = (props) => {
   const [connectWallet, account, chainId] = useWallet();
   const [totalNumber, setTotalNumber] = React.useState("");
@@ -147,21 +149,14 @@ export const MintButton: React.FC<{
 
       setLoading(true);
       let tx;
-      switch (props.chainId) {
-        case 1: // Ethereum
-        case 80001: // Mumbai (test)
-        case 42161: // Arbitrum One
-        case 421611: // Arbitrum Testnet
-        case 43114: // Avalanche C-Chain
-        case 43113: // Avalanche FUJI C-Chain
-          const id = (await nftContractWithSigner.totalSupply()).toString();
-          const leaf = keccak256(elements[id]);
-          const proof = merkleTree.getHexProof(leaf);
-          console.log({ id });
-          tx = await nftContractWithSigner.mint(account, id, poemTitles[id], poemBodies[id], proof, {});
-          break;
-        default:
-          tx = await nftContractWithSigner.mint(account, {});
+      if (nftContractWithSigner.poemTitles) {
+        const id = (await nftContractWithSigner.totalSupply()).toString();
+        const leaf = keccak256(elements[id]);
+        const proof = merkleTree.getHexProof(leaf);
+        console.log({ id });
+        tx = await nftContractWithSigner.mint(account, id, poemTitles[id], poemBodies[id], proof, {});
+      } else {
+        tx = await nftContractWithSigner.mint(account, {});
       }
       setTxHash(tx.hash);
       alert("NFT mining has been started!");
@@ -239,7 +234,12 @@ export const MintButton: React.FC<{
           </Text>
           {props.openseaUrl ? (
             <a href={props.openseaUrl} target="_blank" rel="noreferrer">
-              <img className="ml-2" width="20px" src="/assets/opensea-logo.png" alt="View on OpenSea" />
+              <img className="ml-2 mr-1" width="20px" src="/assets/opensea-logo.png" alt="View on OpenSea" />
+            </a>
+          ) : null}
+          {props.externalUrl ? (
+            <a href={props.externalUrl} target="_blank" rel="noreferrer" className="mt-1">
+              <FontAwesomeIcon className="ml-2" icon={faLink} />
             </a>
           ) : null}
         </div>

@@ -28,7 +28,8 @@ export const HomeTemplate: React.FC = () => {
                 new ethers.providers.JsonRpcProvider("https://mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb")
               }
               explorerUrlPrefix="https://etherscan.io/tx/"
-              openseaUrl="https://opensea.io/collection/xxxxxxxx" // TODO:
+              openseaUrl="https://opensea.io/collection/sakurato-poem"
+              externalUrl="https://etherscan.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
               chainId={4}
@@ -42,8 +43,8 @@ export const HomeTemplate: React.FC = () => {
               openseaUrl="https://testnets.opensea.io/collection/xxxxxxxx" // TODO:
             /> */}
 
-            <ComingSoonButton label="Polygon" max={max} />
-            {/* <MintButton
+            {/* <ComingSoonButton label="Polygon" max={max} /> */}
+            <MintButton
               chainId={137}
               label="Polygon"
               max={max}
@@ -58,11 +59,16 @@ export const HomeTemplate: React.FC = () => {
                 rpcUrls: ["https://rpc-mainnet.matic.network/"],
                 blockExplorerUrls: ["https://polygonscan.com/"],
               }}
+              jsonRpcProvider={
+                new ethers.providers.JsonRpcProvider(
+                  "https://polygon-mainnet.infura.io/v3/7495501b681645b0b80f955d4139add9"
+                )
+              }
               explorerUrlPrefix="https://polygonscan.com/tx/"
-              openseaUrl="https://opensea.io/collection/xxxxxxxx" // TODO:
-            /> */}
-
-            <MintButton
+              openseaUrl="https://opensea.io/collection/sakurato-poem-polygon"
+              externalUrl="https://polygonscan.com/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
+            />
+            {/* <MintButton
               chainId={80001}
               label="Mumbai"
               max={max}
@@ -89,10 +95,10 @@ export const HomeTemplate: React.FC = () => {
               }
               explorerUrlPrefix="https://mumbai.polygonscan.com/tx/"
               openseaUrl="https://opensea.io/collection/xxxxxxxx" // TODO:
-            />
+            /> */}
 
-            <ComingSoonButton label="BSC" max={max} />
-            {/* <MintButton
+            {/* <ComingSoonButton label="BSC" max={max} /> */}
+            <MintButton
               chainId={56}
               label="BSC"
               max={max}
@@ -113,8 +119,9 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://bsc-dataseed.binance.org")}
               explorerUrlPrefix="https://bscscan.com/tx/"
-            /> */}
-            <MintButton
+              externalUrl="https://bscscan.com/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
+            />
+            {/* <MintButton
               chainId={97}
               label="BSC Testnet"
               max={max}
@@ -138,10 +145,10 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://data-seed-prebsc-1-s1.binance.org:8545/")}
               explorerUrlPrefix="https://testnet.bscscan.com/tx/"
-            />
+            /> */}
 
-            <ComingSoonButton label="Arbitrum One" max={max} />
-            {/* <MintButton
+            {/* <ComingSoonButton label="Arbitrum One" max={max} /> */}
+            <MintButton
               chainId={42161}
               label="Arbitrum One"
               max={max}
@@ -162,8 +169,9 @@ export const HomeTemplate: React.FC = () => {
                 )
               }
               explorerUrlPrefix="https://explorer.arbitrum.io/tx/"
-            /> */}
-            <MintButton
+              externalUrl="https://explorer.arbitrum.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973"
+            />
+            {/* <MintButton
               chainId={421611}
               label="Arbitrum Testnet"
               max={max}
@@ -184,10 +192,35 @@ export const HomeTemplate: React.FC = () => {
                 )
               }
               explorerUrlPrefix="https://rinkeby-explorer.arbitrum.io/tx/"
+            /> */}
+
+            {/* <ComingSoonButton label="Optimistic Ethereum" max={max} /> */}
+            <MintButton
+              chainId={10}
+              label="Optimistic Ethereum"
+              max={max}
+              chainParams={{
+                chainId: "0xa",
+                chainName: "Optimistic Ethereum",
+                nativeCurrency: {
+                  name: "ETH",
+                  symbol: "ETH",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://mainnet.optimism.io"],
+                blockExplorerUrls: ["https://optimistic.etherscan.io/"],
+              }}
+              jsonRpcProvider={
+                new ethers.providers.JsonRpcProvider(
+                  "https://optimism-mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb"
+                )
+              }
+              explorerUrlPrefix="https://optimistic.etherscan.io/tx/"
+              externalUrl="https://optimistic.etherscan.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
 
-            <ComingSoonButton label="Shiden" max={max} />
-            {/* <MintButton
+            {/* <ComingSoonButton label="Shiden" max={max} /> */}
+            <MintButton
               chainId={336}
               label="Shiden"
               max={max}
@@ -204,8 +237,9 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://shiden.api.onfinality.io/public")}
               explorerUrlPrefix="https://blockscout.com/shiden/tx/"
-            /> */}
-            <MintButton
+              externalUrl="https://blockscout.com/shiden/address/0xA87AbF6854207075e65D16cF86a8ece1216eA973/contracts"
+            />
+            {/* <MintButton
               chainId={81}
               label="Shibuya"
               max={max}
@@ -222,40 +256,16 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://rpc.shibuya.astar.network:8545")}
               explorerUrlPrefix="https://shibuya.subscan.io/tx/"
-            />
-
-            <ComingSoonButton label="Optimism" max={max} />
-            {/* <MintButton
-              chainId={10}
-              label="Optimism"
-              max={max}
-              chainParams={{
-                chainId: "0xa",
-                chainName: "Optimism",
-                nativeCurrency: {
-                  name: "ETH",
-                  symbol: "ETH",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://mainnet.optimism.io"],
-                blockExplorerUrls: ["https://optimistic.etherscan.io/"],
-              }}
-              jsonRpcProvider={
-                new ethers.providers.JsonRpcProvider(
-                  "https://optimism-mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb"
-                )
-              }
-              explorerUrlPrefix="https://optimistic.etherscan.io/tx/"
             /> */}
 
-            <ComingSoonButton label="Avalanche C-Chain" max={max} />
-            {/* <MintButton
+            {/* <ComingSoonButton label="Avalanche C-Chain" max={max} /> */}
+            <MintButton
               chainId={43114}
-              label="Avalanche Mainnet C-Chain"
+              label="Avalanche C-Chain"
               max={max}
               chainParams={{
                 chainId: "0xa86a",
-                chainName: "Avalanche Mainnet C-Chain",
+                chainName: "Avalanche C-Chain",
                 nativeCurrency: {
                   name: "AVAX",
                   symbol: "AVAX",
@@ -264,13 +274,10 @@ export const HomeTemplate: React.FC = () => {
                 rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
                 blockExplorerUrls: ["https://snowtrace.io/"],
               }}
-              jsonRpcProvider={
-                new ethers.providers.JsonRpcProvider(
-                  "https://api.avax.network/ext/bc/C/rpc"
-                )
-              }
+              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc")}
               explorerUrlPrefix="https://snowtrace.io/tx/"
-            /> */}
+              externalUrl="https://snowtrace.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
+            />
             {/* <MintButton
               chainId={43113}
               label="Avalanche FUJI C-Chain"
@@ -290,8 +297,9 @@ export const HomeTemplate: React.FC = () => {
               explorerUrlPrefix="https://testnet.snowtrace.io/tx/"
             /> */}
 
-            <ComingSoonButton label="Solana" max={max} />
             <ComingSoonButton label="Flow" max={max} />
+            <ComingSoonButton label="Solana" max={max} />
+            {/* <ComingSoonButton label="Tezos" max={max} /> */}
           </div>
         </div>
       </div>
