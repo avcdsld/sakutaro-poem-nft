@@ -239,7 +239,7 @@ export const MintButton: React.FC<{
           ) : null}
           {props.externalUrl ? (
             <a href={props.externalUrl} target="_blank" rel="noreferrer" className="mt-1">
-              <FontAwesomeIcon className="ml-2" icon={faLink} />
+              <FontAwesomeIcon className="ml-2" icon={faLink} color="white" />
             </a>
           ) : null}
         </div>
