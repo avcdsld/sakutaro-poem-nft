@@ -7,6 +7,7 @@ import { Button } from "../atoms/Button";
 import { getNFTContract } from "../../lib/web3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faStoreAlt } from "@fortawesome/free-solid-svg-icons";
 import { MerkleTree } from "merkletreejs";
 import keccak256 from "keccak256";
 declare global {
@@ -107,6 +108,7 @@ export const MintButton: React.FC<{
   jsonRpcProvider: any;
   explorerUrlPrefix?: string;
   openseaUrl?: string;
+  otherMarketUrl?: string;
   externalUrl?: string;
 }> = (props) => {
   const [connectWallet, account, chainId] = useWallet();
@@ -235,6 +237,11 @@ export const MintButton: React.FC<{
           {props.openseaUrl ? (
             <a href={props.openseaUrl} target="_blank" rel="noreferrer">
               <img className="ml-2 mr-1" width="20px" src="/assets/opensea-logo.png" alt="View on OpenSea" />
+            </a>
+          ) : null}
+          {props.otherMarketUrl ? (
+            <a href={props.otherMarketUrl} target="_blank" rel="noreferrer" className="mt-0">
+              <FontAwesomeIcon className="ml-2" icon={faStoreAlt} color="white" />
             </a>
           ) : null}
           {props.externalUrl ? (

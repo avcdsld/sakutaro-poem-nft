@@ -119,6 +119,7 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://bsc-dataseed.binance.org")}
               explorerUrlPrefix="https://bscscan.com/tx/"
+              otherMarketUrl="https://nftrade.com/assets/bsc/0xa87abf6854207075e65d16cf86a8ece1216ea973"
               externalUrl="https://bscscan.com/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
@@ -276,6 +277,7 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc")}
               explorerUrlPrefix="https://snowtrace.io/tx/"
+              otherMarketUrl="https://nftrade.com/assets/avalanche/0xa87abf6854207075e65d16cf86a8ece1216ea973"
               externalUrl="https://snowtrace.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
