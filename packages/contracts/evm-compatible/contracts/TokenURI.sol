@@ -90,7 +90,7 @@ contract TokenURI {
 
   function tokenURI(uint256 id) public view returns (string memory) {
     string[11] memory parts;
-    parts[0] = '<svg width="400" height="400" viewBox="0, 0, 410, 410" xmlns="http://www.w3.org/2000/svg">';
+    parts[0] = '<svg width="400" height="400" viewBox="0, 0, 400, 400" xmlns="http://www.w3.org/2000/svg">';
     parts[1] = '<defs><linearGradient id="grad1" x1="0%" y1="50%" ><stop offset="0%" stop-color="#0f2350" ><animate id="a1" attributeName="stop-color" values="#0f2350; #6a5acd" begin="0; a2.end" dur="3s" /><animate id="a2" attributeName="stop-color" values="#6a5acd; #0f2350" begin="a1.end" dur="3s" /></stop><stop offset="100%" stop-color="#6a5acd" ><animate id="a3" attributeName="stop-color" values="#6a5acd; #0f2350" begin="0; a4.end" dur="3s" /><animate id="a4" attributeName="stop-color" values="#0f2350; #6a5acd" begin="a3.end" dur="3s" /></stop></linearGradient></defs>';
     parts[2] = '<style type="text/css">p {font-family: serif; color: white;}</style>';
     parts[3] = '<rect width="400" height="400" fill="url(#grad1)" />';
