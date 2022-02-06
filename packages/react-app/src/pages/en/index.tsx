@@ -1,9 +1,9 @@
-import "../styles/globals.css";
+import "../../styles/globals.css";
 
 import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
-import { IndexPage } from "../components/templates/IndexPage";
+import { IndexPageEn } from "../../components/templates/IndexPageEn";
 
 function getLibrary(provider: any) {
   const library = new Web3Provider(provider);
@@ -14,7 +14,7 @@ function getLibrary(provider: any) {
 const fn = function () {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <IndexPage />
+      <IndexPageEn />
     </Web3ReactProvider>
   );
 };
