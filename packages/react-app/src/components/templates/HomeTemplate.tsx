@@ -220,45 +220,6 @@ export const HomeTemplate: React.FC = () => {
               externalUrl="https://optimistic.etherscan.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
 
-            {/* <ComingSoonButton label="Shiden" max={max} /> */}
-            <MintButton
-              chainId={336}
-              label="Shiden"
-              max={max}
-              chainParams={{
-                chainId: "0x150",
-                chainName: "Shiden",
-                nativeCurrency: {
-                  name: "SDN",
-                  symbol: "SDN",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://shiden.api.onfinality.io/public", "https://rpc.shiden.astar.network:8545"],
-                blockExplorerUrls: ["https://blockscout.com/shiden/"],
-              }}
-              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://shiden.api.onfinality.io/public")}
-              explorerUrlPrefix="https://blockscout.com/shiden/tx/"
-              externalUrl="https://blockscout.com/shiden/address/0xA87AbF6854207075e65D16cF86a8ece1216eA973/contracts"
-            />
-            {/* <MintButton
-              chainId={81}
-              label="Shibuya"
-              max={max}
-              chainParams={{
-                chainId: "0x51",
-                chainName: "Shibuya",
-                nativeCurrency: {
-                  name: "SBY",
-                  symbol: "SBY",
-                  decimals: 18,
-                },
-                rpcUrls: ["https://rpc.shibuya.astar.network:8545"],
-                blockExplorerUrls: ["https://shibuya.subscan.io/"],
-              }}
-              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://rpc.shibuya.astar.network:8545")}
-              explorerUrlPrefix="https://shibuya.subscan.io/tx/"
-            /> */}
-
             {/* <ComingSoonButton label="Avalanche C-Chain" max={max} /> */}
             <MintButton
               chainId={43114}
@@ -298,6 +259,65 @@ export const HomeTemplate: React.FC = () => {
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.avax-test.network/ext/bc/C/rpc")}
               explorerUrlPrefix="https://testnet.snowtrace.io/tx/"
             /> */}
+
+            {/* <ComingSoonButton label="Shiden" max={max} /> */}
+            <MintButton
+              chainId={336}
+              label="Shiden"
+              max={max}
+              chainParams={{
+                chainId: "0x150",
+                chainName: "Shiden",
+                nativeCurrency: {
+                  name: "SDN",
+                  symbol: "SDN",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://shiden.api.onfinality.io/public", "https://rpc.shiden.astar.network:8545"],
+                blockExplorerUrls: ["https://blockscout.com/shiden/"],
+              }}
+              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://shiden.api.onfinality.io/public")}
+              explorerUrlPrefix="https://blockscout.com/shiden/tx/"
+              externalUrl="https://blockscout.com/shiden/address/0xA87AbF6854207075e65D16cF86a8ece1216eA973/contracts"
+            />
+            {/* <MintButton
+              chainId={81}
+              label="Shibuya"
+              max={max}
+              chainParams={{
+                chainId: "0x51",
+                chainName: "Shibuya",
+                nativeCurrency: {
+                  name: "SBY",
+                  symbol: "SBY",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://rpc.shibuya.astar.network:8545"],
+                blockExplorerUrls: ["https://shibuya.subscan.io/"],
+              }}
+              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://rpc.shibuya.astar.network:8545")}
+              explorerUrlPrefix="https://shibuya.subscan.io/tx/"
+            /> */}
+
+            <MintButton
+              chainId={592}
+              label="Astar"
+              max={max}
+              chainParams={{
+                chainId: "0x250",
+                chainName: "Astar",
+                nativeCurrency: {
+                  name: "ASTR",
+                  symbol: "ASTR",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://rpc.astar.network:8545", "https://astar.api.onfinality.io/public"],
+                blockExplorerUrls: ["https://blockscout.com/astar/"],
+              }}
+              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://astar.api.onfinality.io/public")}
+              explorerUrlPrefix="https://blockscout.com/astar/tx/"
+              externalUrl="https://blockscout.com/astar/address/0xA87AbF6854207075e65D16cF86a8ece1216eA973/contracts"
+            />
 
             <ComingSoonButton label="Flow" max={max} />
             <ComingSoonButton label="Solana" max={max} />

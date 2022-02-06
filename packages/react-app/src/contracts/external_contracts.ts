@@ -1120,6 +1120,11 @@ const contractsInfo: any = {
       nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbiForEth },
     },
   },
+  592: {
+    contracts: {
+      nft: { address: "0xA87AbF6854207075e65D16cF86a8ece1216eA973", abi: nftAbi },
+    },
+  },
 };
 
 export default contractsInfo;

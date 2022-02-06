@@ -78,6 +78,12 @@ module.exports = {
       gas: 2100000,
       gasPrice: 12000000000,
     },
+    astar: {
+      url: "https://rpc.astar.network:8545",
+      accounts: [privateKey],
+      gas: 13000000,
+      gasPrice: 1000000000,
+    },
     optimism: {
       url: "https://optimism-mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb",
       accounts: [privateKey],
