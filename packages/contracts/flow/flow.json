@@ -1,0 +1,45 @@
+{
+  "emulators": {
+    "default": {
+      "port": 3569,
+      "serviceAccount": "emulator-account"
+    }
+  },
+  "contracts": {
+    "NonFungibleToken": "./contracts/core/NonFungibleToken.cdc",
+    "MetadataViews": "./contracts/core/MetadataViews.cdc",
+    "SakutaroPoem": "./contracts/SakutaroPoem.cdc",
+    "SakutaroPoemReplica": "./contracts/SakutaroPoemReplica.cdc",
+    "SakutaroPoemContent": "./contracts/SakutaroPoemContent.cdc"
+  },
+  "networks": {
+    "emulator": "127.0.0.1:3569",
+    "mainnet": "access.mainnet.nodes.onflow.org:9000",
+    "testnet": "access.devnet.nodes.onflow.org:9000"
+  },
+  "accounts": {
+    "emulator-account": {
+      "address": "f8d6e0586b0a20c7",
+      "key": "5f6065160f2c5d9d30fc61c697af6f73a4e84cb664966502ecc090fb2d289b5f"
+    },
+    "emulator-account2": {
+      "address": "01cf0e2f2f715450",
+      "key": "0c32947083636d373889fa4250c3dcf9d75e6c4c0a153b281d3817b69e6c5fdf"
+    },
+    "emulator-account3": {
+      "address": "0x179b6b1cb6755e31",
+      "key": "6980a565c3d217cf98c13b48b4833ee138ffb3d14461b4f9ee3fb8525ea8c80d"
+    }
+  },
+  "deployments": {
+    "emulator": {
+      "emulator-account": [
+        "NonFungibleToken",
+        "MetadataViews",
+        "SakutaroPoem",
+        "SakutaroPoemReplica",
+        "SakutaroPoemContent"
+      ]
+    }
+  }
+}
