@@ -8,6 +8,7 @@
   "contracts": {
     "NonFungibleToken": "./contracts/core/NonFungibleToken.cdc",
     "MetadataViews": "./contracts/core/MetadataViews.cdc",
+    "Base64Util": "./contracts/Base64Util.cdc",
     "SakutaroPoem": "./contracts/SakutaroPoem.cdc",
     "SakutaroPoemReplica": "./contracts/SakutaroPoemReplica.cdc",
     "SakutaroPoemContent": "./contracts/SakutaroPoemContent.cdc"
@@ -36,6 +37,7 @@
       "emulator-account": [
         "NonFungibleToken",
         "MetadataViews",
+        "Base64Util",
         "SakutaroPoem",
         "SakutaroPoemReplica",
         "SakutaroPoemContent"

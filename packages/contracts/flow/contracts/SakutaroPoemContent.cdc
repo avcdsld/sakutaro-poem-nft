@@ -7,6 +7,8 @@
 // \____/  \__,_||_|\_\ \__,_| \__| \__,_||_|    \___/
 //
 //
+import Base64Util from "./Base64Util.cdc"
+
 pub contract SakutaroPoemContent {
     pub let name: String
     pub let description: String
@@ -45,6 +47,10 @@ pub contract SakutaroPoemContent {
             svg = svg.concat("― 萩原 朔太郎")
             svg = svg.concat("</p></foreignObject></svg>")
             return svg
+        }
+
+        pub fun getSvgBase64(): String {
+            return "data:image/svg+xml;base64,".concat(Base64Util.encode(self.getSvg()))
         }
     }
 

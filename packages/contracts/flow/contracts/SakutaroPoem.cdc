@@ -30,6 +30,7 @@ pub contract SakutaroPoem: NonFungibleToken {
         pub let description: String?
         pub let thumbnail: AnyStruct{MetadataViews.File}
         pub let svg: String?
+        pub let svgBase64: String?
         pub let license: String
         pub let creator: String
 
@@ -39,6 +40,7 @@ pub contract SakutaroPoem: NonFungibleToken {
             description: String?,
             thumbnail: AnyStruct{MetadataViews.File},
             svg: String?,
+            svgBase64: String?,
             license: String,
             creator: String
         ) {
@@ -47,6 +49,7 @@ pub contract SakutaroPoem: NonFungibleToken {
             self.description = description
             self.thumbnail = thumbnail
             self.svg = svg
+            self.svgBase64 = svgBase64
             self.license = license
             self.creator = creator
         }
@@ -88,6 +91,7 @@ pub contract SakutaroPoem: NonFungibleToken {
                         description: SakutaroPoemContent.description,
                         thumbnail: MetadataViews.IPFSFile(cid: poem?.ipfsCid ?? "", path: nil),
                         svg: poem?.getSvg(),
+                        svgBase64: poem?.getSvgBase64(),
                         license: "CC-BY 4.0",
                         creator: "Ara"
                     )
