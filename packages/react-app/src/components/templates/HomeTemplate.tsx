@@ -2,6 +2,7 @@ import React from "react";
 
 import { ethers } from "ethers";
 import { MintButton } from "./MintButton";
+import { MintButtonFlow } from "./MintButtonFlow";
 import { ComingSoonButton } from "./ComingSoonButton";
 
 declare global {
@@ -319,7 +320,42 @@ export const HomeTemplate: React.FC = () => {
               externalUrl="https://blockscout.com/astar/address/0xA87AbF6854207075e65D16cF86a8ece1216eA973/contracts"
             />
 
-            <ComingSoonButton label="Flow" max={max} />
+            {/* <MintButtonFlow
+              label="Flow"
+              network="testnet"
+              isReplica={false}
+              max={max}
+              explorerUrlPrefix="https://testnet.flowscan.org/transaction/"
+              externalUrl="https://testnet.flowscan.org/contract/A.0ba61bc9eb0b44c8.SakutaroPoem/overview"
+            />
+
+            <MintButtonFlow
+              label="Flow（Replica version）"
+              network="testnet"
+              isReplica={true}
+              max={10000}
+              explorerUrlPrefix="https://testnet.flowscan.org/transaction/"
+              externalUrl="https://testnet.flowscan.org/contract/A.0ba61bc9eb0b44c8.SakutaroPoemReplica/overview"
+            /> */}
+
+            <MintButtonFlow
+              label="Flow"
+              network="mainnet"
+              isReplica={false}
+              max={max}
+              explorerUrlPrefix="https://flowscan.org/transaction/"
+              externalUrl="https://flowscan.org/contract/A.754c1187102a4b94.SakutaroPoem/overview"
+            />
+
+            <MintButtonFlow
+              label="Flow（Replica version）"
+              network="mainnet"
+              isReplica={true}
+              max={10000}
+              explorerUrlPrefix="https://flowscan.org/transaction/"
+              externalUrl="https://flowscan.org/contract/A.754c1187102a4b94.SakutaroPoemReplica/overview"
+            />
+
             <ComingSoonButton label="Solana" max={max} />
             {/* <ComingSoonButton label="Tezos" max={max} /> */}
           </div>

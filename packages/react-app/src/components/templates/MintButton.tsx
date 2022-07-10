@@ -6,8 +6,7 @@ import { Text } from "../atoms/Text";
 import { Button } from "../atoms/Button";
 import { getNFTContract } from "../../lib/web3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
-import { faStoreAlt } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faStoreAlt } from "@fortawesome/free-solid-svg-icons";
 import { MerkleTree } from "merkletreejs";
 import keccak256 from "keccak256";
 declare global {
