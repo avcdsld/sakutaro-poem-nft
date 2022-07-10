@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Unlicense
+
 pub contract Base64Util {
     pub fun encodeFromDict(_ dict: {String: String}): String {
         let jsonStr = Base64Util.dictToJsonStr(dict)
