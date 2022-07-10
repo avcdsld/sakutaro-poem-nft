@@ -1,4 +1,6 @@
 import { HomeTemplate } from "./HomeTemplate";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLanguage } from "@fortawesome/free-solid-svg-icons";
 
 export const IndexPage: React.FC = () => {
   return (
@@ -389,7 +391,7 @@ export const IndexPage: React.FC = () => {
               </article>
               <header data-s-f2c38d51-0044-4d81-9b03-0adb6897363c="" className="fixed sd">
                 <a
-                  href="https://sakutaro-poem-nft.studio.site/#header"
+                  href="https://sakutaro.on.fleek.co/"
                   data-s-267b3672-0044-47b4-acd9-ba08ab8e83e9=""
                   data-r-0_1_267b3672-0044-47b4-acd9-ba08ab8e83e9=""
                   className="text sd"
@@ -398,6 +400,32 @@ export const IndexPage: React.FC = () => {
                   <br />
                   詩のNFT
                 </a>
+                <div
+                  style={{
+                    justifyContent: "center",
+                    alignContent: "flex-end",
+                    alignItems: "flex-end",
+                    bottom: "auto",
+                    flex: "none",
+                    flexDirection: "column",
+                    flexWrap: "nowrap",
+                    height: "auto",
+                    left: "auto",
+                    margin: "0 0 0 0",
+                    padding: "32px 32px 32px 32px",
+                    position: "fixed",
+                    right: "0px",
+                    top: "0px",
+                    width: "auto",
+                    zIndex: 5,
+                    maxWidth: "100%",
+                  }}
+                >
+                  <a href="https://sakutaro-poem-nft.web.app/en" className="text sd text-white">
+                    EN
+                    <FontAwesomeIcon className="ml-2" icon={faLanguage} color="white" />
+                  </a>
+                </div>
               </header>
             </div>
             <div data-v-433e456e="" className="publish-studio-style"></div>
