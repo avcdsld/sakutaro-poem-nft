@@ -344,7 +344,7 @@ export const HomeTemplate: React.FC = () => {
               isReplica={false}
               max={max}
               explorerUrlPrefix="https://flowscan.org/transaction/"
-              externalUrl="https://flowscan.org/contract/A.754c1187102a4b94.SakutaroPoem/overview"
+              externalUrl="https://flowscan.org/contract/A.e46c2c24053641e2.SakutaroPoem/overview"
             />
 
             <MintButtonFlow
@@ -353,7 +353,7 @@ export const HomeTemplate: React.FC = () => {
               isReplica={true}
               max={10000}
               explorerUrlPrefix="https://flowscan.org/transaction/"
-              externalUrl="https://flowscan.org/contract/A.754c1187102a4b94.SakutaroPoemReplica/overview"
+              externalUrl="https://flowscan.org/contract/A.e46c2c24053641e2.SakutaroPoemReplica/overview"
             />
 
             <ComingSoonButton label="Solana" max={max} />
