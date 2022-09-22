@@ -33,6 +33,7 @@ export const MintButtonFlow: React.FC<{
             : "https://fcl-discovery.onflow.org/testnet/authn",
         "app.detail.title": "Sakutaro Poem",
         "app.detail.icon": "https://sakutaro.on.fleek.co/favicon.ico",
+        "fcl.network": props.network || "testnet",
       });
 
       fcl.unauthenticate();
