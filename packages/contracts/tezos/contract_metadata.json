@@ -1,0 +1,9 @@
+{
+  "name": "Sakurato Poem NFTs",
+  "description": "Thirty-nine poems from Sakutaro Hagiwara's late self-selected collection \"Shukumei\" have been inscribed on Blockchain as full-onchain NFTs. The content of this NFT changes depending on the owner.",
+  "interfaces": ["TZIP-12", "TZIP-16"],
+  "homepage": "https://sakutaro.on.fleek.co",
+  "repository": "https://github.com/avcdsld/sakutaro-poem-nft",
+  "authors": ["Ara"],
+  "license": { "name": "CC-BY 4.0" }
+}
