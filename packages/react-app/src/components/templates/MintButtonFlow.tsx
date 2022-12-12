@@ -3,7 +3,7 @@ import React from "react";
 import { Text } from "../atoms/Text";
 import { Button } from "../atoms/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink, faImage } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faImage, faStoreAlt } from "@fortawesome/free-solid-svg-icons";
 import { useModal } from "react-hooks-use-modal";
 import * as fcl from "@onflow/fcl";
 
@@ -13,6 +13,7 @@ export const MintButtonFlow: React.FC<{
   network: string;
   isReplica: boolean;
   explorerUrlPrefix: string;
+  otherMarketUrl?: string;
   externalUrl?: string;
 }> = (props) => {
   const [account, setAccount] = React.useState(null);
@@ -270,12 +271,12 @@ pub fun main(): UInt64 {
             <a href={props.openseaUrl} target="_blank" rel="noreferrer">
               <img className="ml-2 mr-1" width="20px" src="/assets/opensea-logo.png" alt="View on OpenSea" />
             </a>
-          ) : null}
+          ) : null} */}
           {props.otherMarketUrl ? (
             <a href={props.otherMarketUrl} target="_blank" rel="noreferrer" className="mt-0">
               <FontAwesomeIcon className="ml-2" icon={faStoreAlt} color="white" />
             </a>
-          ) : null} */}
+          ) : null}
           {props.externalUrl ? (
             <a href={props.externalUrl} target="_blank" rel="noreferrer" className="mt-1">
               <FontAwesomeIcon className="ml-2" icon={faLink} color="white" />

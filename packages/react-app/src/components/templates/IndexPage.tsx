@@ -108,7 +108,7 @@ export const IndexPage: React.FC = () => {
                           この NFT は、複数のブロックチェーン上で発行されます。
                           <br />
                           発行されるチェーンは、Ethereum / Polygon / BSC / Arbitrum / Optimism / Shiden / Avalanche
-                          C-Chain / Flow / Solana 等です（順次 対応予定）。各チェーン最大 39 枚まで発行できます。
+                          C-Chain / Flow / Tezos 等です（順次 対応予定）。各チェーン最大 39 枚まで発行できます。
                           <br />
                         </p>
                       </div>

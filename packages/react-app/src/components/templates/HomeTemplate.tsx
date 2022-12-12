@@ -3,6 +3,7 @@ import React from "react";
 import { ethers } from "ethers";
 import { MintButton } from "./MintButton";
 import { MintButtonFlow } from "./MintButtonFlow";
+import { MintButtonTezos } from "./MintButtonTezos";
 import { ComingSoonButton } from "./ComingSoonButton";
 
 declare global {
@@ -171,6 +172,7 @@ export const HomeTemplate: React.FC = () => {
                 )
               }
               explorerUrlPrefix="https://explorer.arbitrum.io/tx/"
+              openseaUrl="https://opensea.io/collection/sakurato-poem-arbitrum"
               externalUrl="https://explorer.arbitrum.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973"
             />
             {/* <MintButton
@@ -218,6 +220,7 @@ export const HomeTemplate: React.FC = () => {
                 )
               }
               explorerUrlPrefix="https://optimistic.etherscan.io/tx/"
+              openseaUrl="https://opensea.io/collection/sakurato-poem-optimism"
               externalUrl="https://optimistic.etherscan.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
 
@@ -239,7 +242,7 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc")}
               explorerUrlPrefix="https://snowtrace.io/tx/"
-              otherMarketUrl="https://nftrade.com/assets/avalanche/0xa87abf6854207075e65d16cf86a8ece1216ea973"
+              openseaUrl="https://opensea.io/collection/sakurato-poem-avalanche"
               externalUrl="https://snowtrace.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
@@ -344,20 +347,37 @@ export const HomeTemplate: React.FC = () => {
               isReplica={false}
               max={max}
               explorerUrlPrefix="https://flowscan.org/transaction/"
+              otherMarketUrl="https://matrixmarket.xyz/collection/mainnet_flow-A.e46c2c24053641e2.SakutaroPoem"
               externalUrl="https://flowscan.org/contract/A.e46c2c24053641e2.SakutaroPoem/overview"
             />
 
-            <MintButtonFlow
+            {/* <MintButtonFlow
               label="Flow（Replica version）"
               network="mainnet"
               isReplica={true}
               max={10000}
               explorerUrlPrefix="https://flowscan.org/transaction/"
               externalUrl="https://flowscan.org/contract/A.e46c2c24053641e2.SakutaroPoemReplica/overview"
+            /> */}
+
+            {/* <MintButtonTezos
+              label="Tezos"
+              network="testnet"
+              max={max}
+              explorerUrlPrefix="https://ghostnet.tzkt.io/"
+              externalUrl="https://ghostnet.tzkt.io/KT1TaMMiut2k8PMSNfNk3Dq99Y9gmeb3Uymg/tokens"
+            /> */}
+
+            <MintButtonTezos
+              label="Tezos"
+              network="mainnet"
+              max={max}
+              explorerUrlPrefix="https://tzkt.io/"
+              otherMarketUrl="https://rarible.com/sakurato-poem-tezos/"
+              externalUrl="https://tzkt.io/KT1XPhLUDWuxvUkjraT73TcLGHjUPiUmbCvx/tokens"
             />
 
-            <ComingSoonButton label="Solana" max={max} />
-            {/* <ComingSoonButton label="Tezos" max={max} /> */}
+            {/* <ComingSoonButton label="Solana" max={max} /> */}
           </div>
         </div>
       </div>
