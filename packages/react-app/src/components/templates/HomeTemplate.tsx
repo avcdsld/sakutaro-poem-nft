@@ -373,7 +373,7 @@ export const HomeTemplate: React.FC = () => {
               network="mainnet"
               max={max}
               explorerUrlPrefix="https://tzkt.io/"
-              otherMarketUrl="https://rarible.com/sakurato-poem-tezos/"
+              otherMarketUrl="https://rarible.com/sakutaro-poem-tezos/"
               externalUrl="https://tzkt.io/KT1XPhLUDWuxvUkjraT73TcLGHjUPiUmbCvx/tokens"
             />
 
