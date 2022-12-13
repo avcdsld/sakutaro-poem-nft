@@ -29,7 +29,7 @@ contract SakutaroPoem is ERC721 {
     address public royaltyReceiver;
     uint256 private seed;
 
-    constructor() ERC721("Sakurato Poem", "SAKU") {
+    constructor() ERC721("Sakutaro Poem", "SAKU") {
         royaltyReceiver = msg.sender;
         seed = block.timestamp;
     }
