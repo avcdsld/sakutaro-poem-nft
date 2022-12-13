@@ -30,7 +30,7 @@ export const HomeTemplate: React.FC = () => {
                 new ethers.providers.JsonRpcProvider("https://mainnet.infura.io/v3/6ae5bd1d600f40048725736711ef4acb")
               }
               explorerUrlPrefix="https://etherscan.io/tx/"
-              openseaUrl="https://opensea.io/collection/sakurato-poem"
+              openseaUrl="https://opensea.io/collection/sakutaro-poem"
               externalUrl="https://etherscan.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
