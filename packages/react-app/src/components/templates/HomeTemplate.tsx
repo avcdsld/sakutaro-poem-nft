@@ -67,7 +67,7 @@ export const HomeTemplate: React.FC = () => {
                 )
               }
               explorerUrlPrefix="https://polygonscan.com/tx/"
-              openseaUrl="https://opensea.io/collection/sakurato-poem-polygon"
+              openseaUrl="https://opensea.io/collection/sakutaro-poem-polygon"
               externalUrl="https://polygonscan.com/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
@@ -172,7 +172,7 @@ export const HomeTemplate: React.FC = () => {
                 )
               }
               explorerUrlPrefix="https://explorer.arbitrum.io/tx/"
-              openseaUrl="https://opensea.io/collection/sakurato-poem-arbitrum"
+              openseaUrl="https://opensea.io/collection/sakutaro-poem-arbitrum"
               externalUrl="https://explorer.arbitrum.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973"
             />
             {/* <MintButton
@@ -220,7 +220,7 @@ export const HomeTemplate: React.FC = () => {
                 )
               }
               explorerUrlPrefix="https://optimistic.etherscan.io/tx/"
-              openseaUrl="https://opensea.io/collection/sakurato-poem-optimism"
+              openseaUrl="https://opensea.io/collection/sakutaro-poem-optimism"
               externalUrl="https://optimistic.etherscan.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
 
@@ -242,7 +242,7 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc")}
               explorerUrlPrefix="https://snowtrace.io/tx/"
-              openseaUrl="https://opensea.io/collection/sakurato-poem-avalanche"
+              openseaUrl="https://opensea.io/collection/sakutaro-poem-avalanche"
               externalUrl="https://snowtrace.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
