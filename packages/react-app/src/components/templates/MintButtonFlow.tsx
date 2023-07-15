@@ -51,11 +51,6 @@ export const MintButtonFlow: React.FC<{
     try {
       setLoading(true);
 
-      const isSealed = false;
-      const blockResponse = await fcl.send([fcl.getBlock(isSealed)]);
-      const block = await fcl.decode(blockResponse);
-      console.log(block);
-
       const txCode = !isReplica
         ? `\
 import NonFungibleToken from ${nonFungibleTokenAddress}
@@ -106,7 +101,6 @@ transaction() {
         fcl.authorizations([fcl.authz]),
         fcl.payer(fcl.authz),
         fcl.limit(9999),
-        fcl.ref(block.id),
       ]);
 
       setTxId(tx.transactionId);

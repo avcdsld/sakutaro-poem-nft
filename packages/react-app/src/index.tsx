@@ -1,10 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import App from "./App";
+import { createRoot } from 'react-dom/client';
+import { WalletProvider } from "@suiet/wallet-kit";
+import { Buffer } from "buffer";
+import "@suiet/wallet-kit/style.css";
+import "./styles/tailwind.css";
+import "./styles/globals.css";
 
-ReactDOM.render(
-  <React.StrictMode>
+// @ts-ignore
+window.Buffer = Buffer;
+
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
+  <WalletProvider>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </WalletProvider>
 );
