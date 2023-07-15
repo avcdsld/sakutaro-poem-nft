@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import { MintButton } from "./MintButton";
 import { MintButtonFlow } from "./MintButtonFlow";
 import { MintButtonTezos } from "./MintButtonTezos";
+import { MintButtonSui } from "./MintButtonSui";
 import { ComingSoonButton } from "./ComingSoonButton";
 
 declare global {
@@ -375,6 +376,15 @@ export const HomeTemplate: React.FC = () => {
               explorerUrlPrefix="https://tzkt.io/"
               otherMarketUrl="https://rarible.com/sakutaro-poem-tezos/"
               externalUrl="https://tzkt.io/KT1XPhLUDWuxvUkjraT73TcLGHjUPiUmbCvx/tokens"
+            />
+
+            <MintButtonSui
+              label="Sui Devnet"
+              network="devnet"
+              max={max}
+              explorerUrlPrefix="https://explorer.sui.io/"
+              otherMarketUrl=""
+              externalUrl="https://suiexplorer.com/object/0x77f06a9155f75e35ac11c5dfae1d6c391eabd326746542757b3ab9b46f9d14e5?module=sakutaro_poem&network=devnet"
             />
 
             {/* <ComingSoonButton label="Solana" max={max} /> */}
