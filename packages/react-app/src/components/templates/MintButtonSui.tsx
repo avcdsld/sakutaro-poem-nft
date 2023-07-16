@@ -5,7 +5,7 @@ import { Button } from "../atoms/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faImage, faStoreAlt } from "@fortawesome/free-solid-svg-icons";
 import { useModal } from "react-hooks-use-modal";
-import { JsonRpcProvider, TransactionBlock } from "@mysten/sui.js";
+import { Connection, JsonRpcProvider, TransactionBlock } from "@mysten/sui.js";
 import { ConnectModal, useWallet } from "@suiet/wallet-kit";
 
 export const MintButtonSui: React.FC<{
@@ -16,8 +16,16 @@ export const MintButtonSui: React.FC<{
   otherMarketUrl?: string;
   externalUrl?: string;
 }> = (props) => {
-  const provider = new JsonRpcProvider();
-  const { connected, status, account, signAndExecuteTransactionBlock } = useWallet();
+  let provider;
+  if (props.network === 'mainnet') {
+    const connection = new Connection({
+      fullnode: 'https://rpc.mainnet.sui.io/'
+    });
+    provider = new JsonRpcProvider(connection);
+  } else {
+    provider = new JsonRpcProvider();
+  }
+  const { connected, account, signAndExecuteTransactionBlock } = useWallet();
 
   const [showConnectModal, setShowConnectModal] = React.useState(false);
   const [totalNumber, setTotalNumber] = React.useState("");
@@ -35,9 +43,9 @@ export const MintButtonSui: React.FC<{
   };
 
   const sakutaroPoemPackageID =
-    props.network === "mainnet" ? "TODO" : "0x77f06a9155f75e35ac11c5dfae1d6c391eabd326746542757b3ab9b46f9d14e5";
+    props.network === "mainnet" ? "0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1" : "0x82bd7c22a07b14bdb05227a0b7e2c767bb983f4adcbf8b76a1be80fbec793578";
   const sakutaroPoemSupplyID =
-    props.network === "mainnet" ? "TODO" : "0x3d1389a2155b71bf6be4e502efa32c75aa250243421f67ea2b93e94056cc2061";
+    props.network === "mainnet" ? "0xdf35ed2fcc90bc1b1281e43461c9cc0ccad7456d8e9646e6d5de09076e8e5156" : "0x61697201431897d30fa1e083f3168ed1a8cb0d7e7b76d82a7154b07cc4863f5c";
 
   const mint = async () => {
     try {
@@ -106,7 +114,7 @@ export const MintButtonSui: React.FC<{
 
   const loadLastTokenId = async () => {
     try {
-      if (account?.address == null) {
+      if (!provider) {
         return;
       }
       const object = await provider.getObject({
@@ -118,7 +126,7 @@ export const MintButtonSui: React.FC<{
       })
       console.log(object, object.data?.content!);
       const content: any = object.data?.content;
-      const totalNumber = content.fields['totalSupply'];
+      const totalNumber = content.fields['total_supply'];
       setTotalNumber(totalNumber);
     } catch (e) {
       setTotalNumber('-');

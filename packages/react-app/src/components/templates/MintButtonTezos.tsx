@@ -25,8 +25,8 @@ export const MintButtonTezos: React.FC<{
   const [totalNumber, setTotalNumber] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
   const [txId, setTxId] = React.useState("");
-  const [Modal, open] = useModal("root", { preventScroll: true });
-  const [svgBase64, setSvgBase64] = React.useState("");
+  const [Modal,] = useModal("root", { preventScroll: true });
+  const [svgBase64,] = React.useState("");
 
   const Tezos = new TezosToolkit(
     props.network === "mainnet" ? "	https://mainnet.tezos.marigold.dev" : "https://ghostnet.ecadinfra.com"

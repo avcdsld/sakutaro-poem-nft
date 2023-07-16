@@ -12,7 +12,7 @@ window.Buffer = Buffer;
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
-  <WalletProvider>
+  <WalletProvider autoConnect={false}>
     <App />
   </WalletProvider>
 );
