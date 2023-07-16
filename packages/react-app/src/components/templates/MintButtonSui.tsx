@@ -16,17 +16,9 @@ export const MintButtonSui: React.FC<{
   otherMarketUrl?: string;
   externalUrl?: string;
 }> = (props) => {
-  let provider;
-  if (props.network === 'mainnet') {
-    const connection = new Connection({
-      fullnode: 'https://rpc.mainnet.sui.io/'
-    });
-    provider = new JsonRpcProvider(connection);
-  } else {
-    provider = new JsonRpcProvider();
-  }
+  const provider = new JsonRpcProvider(props.network === 'mainnet' ?
+    new Connection({ fullnode: 'https://rpc.mainnet.sui.io/' }) : undefined);
   const { connected, account, signAndExecuteTransactionBlock } = useWallet();
-
   const [showConnectModal, setShowConnectModal] = React.useState(false);
   const [totalNumber, setTotalNumber] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
@@ -34,18 +26,12 @@ export const MintButtonSui: React.FC<{
   const [Modal, open] = useModal("root", { preventScroll: true });
   const [svgBase64, setSvgBase64] = React.useState("");
 
-  const connectWallet = async () => {
-    try {
-      console.log("connect"); // TODO:
-    } catch (e: any) {
-      console.log(e);
-    }
-  };
-
-  const sakutaroPoemPackageID =
-    props.network === "mainnet" ? "0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1" : "0x82bd7c22a07b14bdb05227a0b7e2c767bb983f4adcbf8b76a1be80fbec793578";
-  const sakutaroPoemSupplyID =
-    props.network === "mainnet" ? "0xdf35ed2fcc90bc1b1281e43461c9cc0ccad7456d8e9646e6d5de09076e8e5156" : "0x61697201431897d30fa1e083f3168ed1a8cb0d7e7b76d82a7154b07cc4863f5c";
+  const sakutaroPoemPackageID = props.network === "mainnet" ?
+    "0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1" :
+    "0x82bd7c22a07b14bdb05227a0b7e2c767bb983f4adcbf8b76a1be80fbec793578";
+  const sakutaroPoemSupplyID = props.network === "mainnet" ?
+    "0xdf35ed2fcc90bc1b1281e43461c9cc0ccad7456d8e9646e6d5de09076e8e5156" :
+    "0x61697201431897d30fa1e083f3168ed1a8cb0d7e7b76d82a7154b07cc4863f5c";
 
   const mint = async () => {
     try {
@@ -54,22 +40,11 @@ export const MintButtonSui: React.FC<{
       const tx = new TransactionBlock();
       tx.moveCall({
         target: `${sakutaroPoemPackageID}::sakutaro_poem::mint`,
-        arguments: [
-          tx.pure(sakutaroPoemSupplyID),
-        ]
+        arguments: [tx.pure(sakutaroPoemSupplyID)],
       });
-
       const input: any = { transactionBlock: tx }
       const resData = await signAndExecuteTransactionBlock(input);
-
-      // updateFormInput({ magic: "", strength: "", recipient: "" })
       console.log('success', resData);
-      if (resData && resData.digest && resData.digest) {
-        // setTransaction(TransacitonLink(resData.digest, "my_module"));
-        console.log(`https://explorer.sui.io/txblock/${resData.digest}?module=sakutaro_poem&network=${props.network}`);
-      }
-
-      console.log("mint");
       setTxId(resData.digest);
 
       setLoading(false);
@@ -158,7 +133,7 @@ export const MintButtonSui: React.FC<{
                   open={showConnectModal}
                   onOpenChange={(open) => setShowConnectModal(open)}
                 >
-                  <Button onClick={connectWallet} color="red" rounded={true}>
+                  <Button color="red" rounded={true}>
                     Connect Wallet
                   </Button>
                 </ConnectModal>
