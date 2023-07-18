@@ -106,7 +106,7 @@ export const IndexPageEn: React.FC = () => {
                           These NFTs will be issued on multiple blockchains.
                           <br />
                           NFTs can be issued on chains such as Ethereum, Polygon, BSC, Arbitrum, Optimism, Shiden,
-                          Avalanche C-Chain, Flow, Solana, etc. (to be supported in due course). Up to 39 NFTs can be
+                          Avalanche C-Chain, Flow, Tezos, Sui, etc. (to be supported in due course). Up to 39 NFTs can be
                           issued for each chain.
                           <br />
                         </p>
