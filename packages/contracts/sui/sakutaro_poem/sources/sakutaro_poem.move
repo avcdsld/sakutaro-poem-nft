@@ -292,7 +292,6 @@ module sakutaro_poem::sakutaro_poem {
         test_scenario::next_tx(scenario, admin);
         {
             let supply = test_scenario::take_shared<SakutaroPoemSupply>(scenario);
-            debug::print(test_scenario::ctx(scenario));
             mint(&mut supply, test_scenario::ctx(scenario));
             test_scenario::return_shared(supply);
         };
