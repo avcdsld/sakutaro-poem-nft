@@ -5,6 +5,7 @@ import { MintButton } from "./MintButton";
 import { MintButtonFlow } from "./MintButtonFlow";
 import { MintButtonTezos } from "./MintButtonTezos";
 import { MintButtonSui } from "./MintButtonSui";
+import { MintButtonAptos } from "./MintButtonAptos";
 // import { ComingSoonButton } from "./ComingSoonButton";
 
 declare global {
@@ -394,6 +395,24 @@ export const HomeTemplate: React.FC = () => {
               explorerUrlPrefix="https://explorer.sui.io/"
               otherMarketUrl=""
               externalUrl="https://suiexplorer.com/object/0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1?module=sakutaro_poem"
+            />
+
+            {/* <MintButtonAptos
+              label="Aptos Devnet"
+              network="devnet"
+              max={max}
+              explorerUrlPrefix="https://explorer.aptoslabs.com/"
+              otherMarketUrl=""
+              externalUrl="https://explorer.aptoslabs.com/account/0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d/modules/code/sakutaro_poem?network=devnet"
+            /> */}
+
+            <MintButtonAptos
+              label="Aptos"
+              network="mainnet"
+              max={max}
+              explorerUrlPrefix="https://explorer.aptoslabs.com/"
+              otherMarketUrl=""
+              externalUrl="https://explorer.aptoslabs.com/account/0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d/modules/code/sakutaro_poem?network=mainnet"
             />
 
             {/* <ComingSoonButton label="Solana" max={max} /> */}

@@ -1,0 +1,19 @@
+[package]
+name = "sakutaro_poem"
+version = "0.0.0"
+
+[dependencies]
+MoveStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/move-stdlib/", rev="devnet"}
+AptosStdlib = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-stdlib/", rev="devnet"}
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-framework/", rev="devnet"}
+AptosToken = { git = "https://github.com/aptos-labs/aptos-core.git", subdir = "aptos-move/framework/aptos-token/", rev="devnet"}
+
+[addresses]
+# sakutaro_poem = "0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d"
+# std = "0x1"
+# aptos_std = "0x1"
+# aptos_framework = "0x1"
+# aptos_token = "0x3"
+source_address = "0xb21de0e2a7419d35d5abde4baa2a72159cd3a7cea042defd0e54b1faa022a474"
+resource_address = "0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d"
+# resource_address = "c567f3711009f9d00a42b2e0852ddbd27a3492be74f3fef67eb5affda34dddfd"

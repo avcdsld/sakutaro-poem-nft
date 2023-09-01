@@ -29,7 +29,8 @@ export const MintButtonTezos: React.FC<{
   const [svgBase64,] = React.useState("");
 
   const Tezos = new TezosToolkit(
-    props.network === "mainnet" ? "	https://mainnet.tezos.marigold.dev" : "https://ghostnet.ecadinfra.com"
+    // rpc nodes: https://tezostaquito.io/docs/rpc_nodes
+    props.network === "mainnet" ? "	https://rpc.tzbeta.net/" : "https://ghostnet.ecadinfra.com"
   );
   Tezos.addExtension(new Tzip12Module());
   const wallet = new BeaconWallet({ name: "Sakutaro Poem NFT" });

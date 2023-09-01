@@ -5,3 +5,17 @@
 body {
   background-color: black;
 }
+
+.wallet-button {
+  height: 40px !important;
+
+  background-color:red !important;
+  width: 100% !important;
+  border-radius: 0.75rem !important;
+  border-width: 0 !important;
+
+  background-color: rgb(239 68 68 / 1) !important;
+}
+.wallet-button span {
+  color:rgb(255 255 255 / 1) !important;
+}

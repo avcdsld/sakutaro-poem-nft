@@ -127,3 +127,6 @@ packages/contracts/deployments
 
 # misc
 .DS_Store
+
+# Aptos CLI
+.aptos

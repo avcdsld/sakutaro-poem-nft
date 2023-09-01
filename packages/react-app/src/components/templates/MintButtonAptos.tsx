@@ -5,10 +5,11 @@ import { Button } from "../atoms/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faImage, faStoreAlt } from "@fortawesome/free-solid-svg-icons";
 import { useModal } from "react-hooks-use-modal";
-import { Connection, JsonRpcProvider, TransactionBlock } from "@mysten/sui.js";
-import { ConnectModal, useWallet } from "@suiet/wallet-kit";
+import { Provider, Network } from "aptos";
+import { WalletSelector } from "@aptos-labs/wallet-adapter-ant-design";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
-export const MintButtonSui: React.FC<{
+export const MintButtonAptos: React.FC<{
   label: string;
   max: number;
   network: string;
@@ -16,9 +17,12 @@ export const MintButtonSui: React.FC<{
   otherMarketUrl?: string;
   externalUrl?: string;
 }> = (props) => {
-  const provider = new JsonRpcProvider(props.network === 'mainnet' ?
-    new Connection({ fullnode: 'https://rpc.mainnet.sui.io/' }) : undefined);
-  const { connected, account, signAndExecuteTransactionBlock } = useWallet();
+  const provider = new Provider(props.network === "mainnet" ? Network.MAINNET : Network.DEVNET);
+  const {
+    account,
+    connected,
+    signAndSubmitTransaction,
+  } = useWallet();
   const [showConnectModal, setShowConnectModal] = React.useState(false);
   const [totalNumber, setTotalNumber] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
@@ -26,26 +30,24 @@ export const MintButtonSui: React.FC<{
   const [Modal, open] = useModal("root", { preventScroll: true });
   const [svgBase64, setSvgBase64] = React.useState("");
 
-  const sakutaroPoemPackageID = props.network === "mainnet" ?
-    "0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1" :
-    "0x82bd7c22a07b14bdb05227a0b7e2c767bb983f4adcbf8b76a1be80fbec793578";
-  const sakutaroPoemSupplyID = props.network === "mainnet" ?
-    "0xdf35ed2fcc90bc1b1281e43461c9cc0ccad7456d8e9646e6d5de09076e8e5156" :
-    "0x61697201431897d30fa1e083f3168ed1a8cb0d7e7b76d82a7154b07cc4863f5c";
+  const sakutaroPoemModuleAddress = props.network === "mainnet" ?
+    "0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d" :
+    "0xc567f3711009f9d00a42b2e0852ddbd27a3492be74f3fef67eb5affda34dddfd";
 
   const mint = async () => {
     try {
       setLoading(true);
 
-      const tx = new TransactionBlock();
-      tx.moveCall({
-        target: `${sakutaroPoemPackageID}::sakutaro_poem::mint`,
-        arguments: [tx.pure(sakutaroPoemSupplyID)],
-      });
-      const input: any = { transactionBlock: tx }
-      const resData = await signAndExecuteTransactionBlock(input);
-      console.log('success', resData);
-      setTxId(resData.digest);
+      const payload = {
+        type: "entry_function_payload",
+        function: `${sakutaroPoemModuleAddress}::sakutaro_poem::mint`,
+        type_arguments: [],
+        arguments: [],
+      };
+      const response = await signAndSubmitTransaction(payload);
+      await provider.waitForTransaction(response.hash);
+      console.log('success', response);
+      setTxId(response.hash);
 
       setLoading(false);
     } catch (e: any) {
@@ -60,24 +62,22 @@ export const MintButtonSui: React.FC<{
       if (account?.address == null) {
         return;
       }
-      const structType = `${sakutaroPoemPackageID}::sakutaro_poem::SakutaroPoem`;
-      const objects = await provider.getOwnedObjects({
-        owner: account?.address,
-        filter: {
-          StructType: structType
-        },
-        options: {
-          showType: true,
-          showContent: true,
-          showDisplay: true,
-        }
-      })
-      console.log(objects);
-      if (!objects || !objects.data || objects.data.length === 0) {
+
+      const tokens = await provider.getOwnedTokens(account?.address);
+      const tokensProperties = tokens.current_token_ownerships_v2.filter(token => {
+        const collection = token.current_token_data?.current_collection;
+        return (
+          collection &&
+          collection.collection_name === "Sakutaro Poem" &&
+          collection.creator_address === sakutaroPoemModuleAddress
+        )
+      }).map(token => token.current_token_data?.token_properties);
+      if (tokensProperties.length === 0) {
+        console.log("there is no nft");
         return;
       }
 
-      const svgBase64 = objects.data[0].data?.display?.data!['animation_url'];
+      const svgBase64 = tokensProperties[0].poem_svg_base64;
       console.log(svgBase64);
       setSvgBase64(svgBase64);
       open();
@@ -87,29 +87,26 @@ export const MintButtonSui: React.FC<{
     }
   };
 
-  const loadLastTokenId = async () => {
+  const loadTotalNumber = async () => {
     try {
       if (!provider) {
         return;
       }
-      const object = await provider.getObject({
-        id: sakutaroPoemSupplyID,
-        options: {
-          showType: true,
-          showContent: true,
-        }
-      })
-      console.log(object, object.data?.content!);
-      const content: any = object.data?.content;
-      const totalNumber = content.fields['total_supply'];
+      const moduleDataResource = await provider.getAccountResource(
+        sakutaroPoemModuleAddress,
+        `${sakutaroPoemModuleAddress}::sakutaro_poem::ModuleData`
+      );
+      console.log(moduleDataResource);
+      const totalNumber = moduleDataResource.data["token_minting_events"].counter
       setTotalNumber(totalNumber);
     } catch (e) {
+      console.log(e);
       setTotalNumber('-');
     }
   };
 
   React.useEffect(() => {
-    loadLastTokenId();
+    loadTotalNumber();
   });
 
   return (
@@ -128,15 +125,13 @@ export const MintButtonSui: React.FC<{
         ) : (
           <>
             <div className="m-auto p-4">
+              <div style={{display: "none"}}>
+                <WalletSelector isModalOpen={showConnectModal} setModalOpen={setShowConnectModal} />
+              </div>
               {!connected ? (
-                <ConnectModal
-                  open={showConnectModal}
-                  onOpenChange={(open) => setShowConnectModal(open)}
-                >
-                  <Button color="red" rounded={true}>
-                    Connect Wallet
-                  </Button>
-                </ConnectModal>
+                <Button onClick={() => setShowConnectModal(true)} color="red" rounded={true}>
+                  Connect Wallet
+                </Button>
               ) : (
                 <Button onClick={mint} color="red" rounded={true} disabled={isLoading}>
                   {isLoading ? "sending.." : "Mint"}
@@ -146,7 +141,7 @@ export const MintButtonSui: React.FC<{
                 <>
                   <div className="mt-5">
                     {props.explorerUrlPrefix ? (
-                      <a href={props.explorerUrlPrefix + 'txblock/' + txId + `?module=sakutaro_poem&network=${props.network}`} target="_blank" rel="noreferrer">
+                      <a href={props.explorerUrlPrefix + 'txn/' + txId + `?network=${props.network}`} target="_blank" rel="noreferrer">
                         <Text align="center" className="underline" color="white">
                           View Tx
                         </Text>
