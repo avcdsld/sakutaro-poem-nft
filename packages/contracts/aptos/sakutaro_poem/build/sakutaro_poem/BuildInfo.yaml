@@ -1,0 +1,33 @@
+---
+compiled_package_info:
+  package_name: sakutaro_poem
+  address_alias_instantiation:
+    Extensions: "0000000000000000000000000000000000000000000000000000000000000001"
+    aptos_framework: "0000000000000000000000000000000000000000000000000000000000000001"
+    aptos_std: "0000000000000000000000000000000000000000000000000000000000000001"
+    aptos_token: "0000000000000000000000000000000000000000000000000000000000000003"
+    core_resources: 000000000000000000000000000000000000000000000000000000000a550c18
+    resource_address: 718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d
+    sakutaro_poem: 718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d
+    source_address: b21de0e2a7419d35d5abde4baa2a72159cd3a7cea042defd0e54b1faa022a474
+    std: "0000000000000000000000000000000000000000000000000000000000000001"
+    vm_reserved: "0000000000000000000000000000000000000000000000000000000000000000"
+  source_digest: 67EE3426C175AC9E313E02ECA53E236AB30B379178713045EE56EC5A5EB199F2
+  build_flags:
+    dev_mode: false
+    test_mode: false
+    generate_docs: false
+    generate_abis: false
+    install_dir: ~
+    force_recompilation: false
+    additional_named_addresses:
+      sakutaro_poem: 718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d
+    architecture: ~
+    fetch_deps_only: false
+    skip_fetch_latest_git_deps: false
+    bytecode_version: ~
+dependencies:
+  - AptosFramework
+  - AptosStdlib
+  - AptosToken
+  - MoveStdlib
