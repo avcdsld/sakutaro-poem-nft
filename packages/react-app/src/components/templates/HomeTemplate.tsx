@@ -240,12 +240,12 @@ export const HomeTemplate: React.FC = () => {
                   decimals: 18,
                 },
                 rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-                blockExplorerUrls: ["https://snowtrace.io/"],
+                blockExplorerUrls: ["https://avascan.info/"],
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.avax.network/ext/bc/C/rpc")}
-              explorerUrlPrefix="https://snowtrace.io/tx/"
+              explorerUrlPrefix="https://avascan.info/blockchain/c/tx/"
               openseaUrl="https://opensea.io/collection/sakutaro-poem-avalanche"
-              externalUrl="https://snowtrace.io/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
+              externalUrl="https://avascan.info/blockchain/all/address/0xa87abf6854207075e65d16cf86a8ece1216ea973/contract"
             />
             {/* <MintButton
               chainId={43113}
@@ -260,10 +260,10 @@ export const HomeTemplate: React.FC = () => {
                   decimals: 18,
                 },
                 rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-                blockExplorerUrls: ["https://testnet.snowtrace.io/"],
+                blockExplorerUrls: ["https://testnet.avascan.info/"],
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.avax-test.network/ext/bc/C/rpc")}
-              explorerUrlPrefix="https://testnet.snowtrace.io/tx/"
+              explorerUrlPrefix="https://testnet.avascan.info/tx/"
             /> */}
 
             {/* <ComingSoonButton label="Shiden" max={max} /> */}
