@@ -53,52 +53,52 @@ export class Erc721TokenReceiver extends Contract {
 
   functions: {
     onERC721Received(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "onERC721Received(address,address,uint256,bytes)"(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
   };
 
   onERC721Received(
-    operator: string,
-    from: string,
-    id: BigNumberish,
-    data: BytesLike,
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish,
+    arg3: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "onERC721Received(address,address,uint256,bytes)"(
-    operator: string,
-    from: string,
-    id: BigNumberish,
-    data: BytesLike,
+    arg0: string,
+    arg1: string,
+    arg2: BigNumberish,
+    arg3: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   callStatic: {
     onERC721Received(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "onERC721Received(address,address,uint256,bytes)"(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: CallOverrides
     ): Promise<string>;
   };
@@ -107,36 +107,36 @@ export class Erc721TokenReceiver extends Contract {
 
   estimateGas: {
     onERC721Received(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "onERC721Received(address,address,uint256,bytes)"(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     onERC721Received(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "onERC721Received(address,address,uint256,bytes)"(
-      operator: string,
-      from: string,
-      id: BigNumberish,
-      data: BytesLike,
+      arg0: string,
+      arg1: string,
+      arg2: BigNumberish,
+      arg3: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
   };

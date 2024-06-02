@@ -108,6 +108,18 @@ module.exports = {
       gas: 21000000,
       gasPrice: 32000000000000,
     },
+    filecoin: {
+      url: "https://api.node.glif.io/rpc/v1",
+      accounts: [privateKey],
+      gas: 2100000,
+      gasPrice: 8000000000,
+    },
+    filecointestnet: {
+      url: "https://api.calibration.node.glif.io/rpc/v1",
+      accounts: [privateKey],
+      gas: 2100000,
+      gasPrice: 8000000000,
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_KEY,

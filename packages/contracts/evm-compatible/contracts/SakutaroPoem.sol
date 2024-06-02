@@ -54,7 +54,7 @@ contract SakutaroPoem is ERC721 {
     }
 
     function tokenURI(uint256 tokenId) public view override(ERC721) returns (string memory) {
-        uint256 id = (uint160(ownerOf[tokenId]) + seed) % uint256(39);
+        uint256 id = (uint160(ownerOf(tokenId)) + seed) % uint256(39);
         return ITokenURI(tokenURIContractAddress).tokenURI(id);
     }
 
@@ -68,7 +68,7 @@ contract SakutaroPoem is ERC721 {
 
     // ERC-2981
     function royaltyInfo(
-        uint256, /* _tokenId */
+        uint256 /* _tokenId */,
         uint256 _value
     ) external view returns (address _receiver, uint256 _royaltyAmount) {
         _receiver = royaltyReceiver;

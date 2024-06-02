@@ -145,14 +145,14 @@ export class Erc721 extends Contract {
     ): Promise<ContractTransaction>;
 
     balanceOf(
-      arg0: string,
+      owner: string,
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
     }>;
 
     "balanceOf(address)"(
-      arg0: string,
+      owner: string,
       overrides?: CallOverrides
     ): Promise<{
       0: BigNumber;
@@ -197,16 +197,18 @@ export class Erc721 extends Contract {
     }>;
 
     ownerOf(
-      arg0: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
+      owner: string;
       0: string;
     }>;
 
     "ownerOf(uint256)"(
-      arg0: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
+      owner: string;
       0: string;
     }>;
 
@@ -300,10 +302,10 @@ export class Erc721 extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+  balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   "balanceOf(address)"(
-    arg0: string,
+    owner: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -330,10 +332,10 @@ export class Erc721 extends Contract {
 
   "name()"(overrides?: CallOverrides): Promise<string>;
 
-  ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+  ownerOf(id: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   "ownerOf(uint256)"(
-    arg0: BigNumberish,
+    id: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -412,10 +414,10 @@ export class Erc721 extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
-      arg0: string,
+      owner: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -442,10 +444,10 @@ export class Erc721 extends Contract {
 
     "name()"(overrides?: CallOverrides): Promise<string>;
 
-    ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+    ownerOf(id: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     "ownerOf(uint256)"(
-      arg0: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -545,10 +547,10 @@ export class Erc721 extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    balanceOf(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     "balanceOf(address)"(
-      arg0: string,
+      owner: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -578,10 +580,10 @@ export class Erc721 extends Contract {
 
     "name()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    ownerOf(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+    ownerOf(id: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     "ownerOf(uint256)"(
-      arg0: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -662,12 +664,12 @@ export class Erc721 extends Contract {
     ): Promise<PopulatedTransaction>;
 
     balanceOf(
-      arg0: string,
+      owner: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "balanceOf(address)"(
-      arg0: string,
+      owner: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -698,12 +700,12 @@ export class Erc721 extends Contract {
     "name()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     ownerOf(
-      arg0: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "ownerOf(uint256)"(
-      arg0: BigNumberish,
+      id: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

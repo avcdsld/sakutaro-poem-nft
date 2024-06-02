@@ -415,6 +415,45 @@ export const HomeTemplate: React.FC = () => {
               externalUrl="https://explorer.aptoslabs.com/account/0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d/modules/code/sakutaro_poem?network=mainnet"
             />
 
+            <MintButton
+              chainId={314}
+              label="Filecoin"
+              max={max}
+              chainParams={{
+                chainId: "0x13a",
+                chainName: "Filecoin",
+                nativeCurrency: {
+                  name: "FIL",
+                  symbol: "FIL",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://api.node.glif.io", "https://api.chain.love/rpc/v1", "https://filecoin.drpc.org"],
+                blockExplorerUrls: ["https://filfox.info/"],
+              }}
+              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.node.glif.io")}
+              explorerUrlPrefix="https://filfox.info/en/message/"
+              externalUrl="https://filfox.info/en/address/0xA87AbF6854207075e65D16cF86a8ece1216eA973?t=3"
+            />
+            {/* <MintButton
+              chainId={314159}
+              label="Filecoin Calibration testnet"
+              max={max}
+              chainParams={{
+                chainId: "0x4cb2f",
+                chainName: "Filecoin Calibration testnet",
+                nativeCurrency: {
+                  name: "tFIL",
+                  symbol: "tFIL",
+                  decimals: 18,
+                },
+                rpcUrls: ["https://api.calibration.node.glif.io/rpc/v1", "https://calibration.filfox.info/rpc/v1"],
+                blockExplorerUrls: ["https://calibration.filfox.info/"],
+              }}
+              jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://api.calibration.node.glif.io/rpc/v1")}
+              explorerUrlPrefix="https://calibration.filfox.info/en/message/"
+              externalUrl="https://calibration.filfox.info/en/address/0x6750d3fd143e91083d4ff10dc659efc517c3ec85?t=3"
+            /> */}
+
             {/* <ComingSoonButton label="Solana" max={max} /> */}
           </div>
         </div>

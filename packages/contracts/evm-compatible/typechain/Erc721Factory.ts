@@ -111,7 +111,7 @@ const _abi = [
     inputs: [
       {
         internalType: "address",
-        name: "",
+        name: "owner",
         type: "address",
       },
     ],
@@ -186,7 +186,7 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "id",
         type: "uint256",
       },
     ],
@@ -194,7 +194,7 @@ const _abi = [
     outputs: [
       {
         internalType: "address",
-        name: "",
+        name: "owner",
         type: "address",
       },
     ],
@@ -286,7 +286,7 @@ const _abi = [
         type: "bool",
       },
     ],
-    stateMutability: "pure",
+    stateMutability: "view",
     type: "function",
   },
   {
