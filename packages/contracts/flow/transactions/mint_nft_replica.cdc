@@ -1,17 +1,15 @@
-import NonFungibleToken from "../contracts/core/NonFungibleToken.cdc"
-import SakutaroPoemReplica from "../contracts/SakutaroPoemReplica.cdc"
+import "NonFungibleToken"
+import "SakutaroPoemReplica"
 
 transaction() {
-    prepare(signer: AuthAccount) {
-        if signer.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) == nil {
-            signer.save(<- SakutaroPoemReplica.createEmptyCollection(), to: SakutaroPoemReplica.CollectionStoragePath)
-            signer.link<&{NonFungibleToken.CollectionPublic, SakutaroPoemReplica.SakutaroPoemReplicaCollectionPublic}>(
-                SakutaroPoemReplica.CollectionPublicPath,
-                target: SakutaroPoemReplica.CollectionStoragePath
-            )
+    prepare(signer: auth(BorrowValue, SaveValue, IssueStorageCapabilityController, PublishCapability) &Account) {
+        if signer.storage.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) == nil {
+            signer.storage.save(<- SakutaroPoemReplica.createEmptyCollection(nftType: Type<@SakutaroPoemReplica.NFT>()), to: SakutaroPoemReplica.CollectionStoragePath)
+            let cap = signer.capabilities.storage.issue<&SakutaroPoemReplica.Collection>(SakutaroPoemReplica.CollectionStoragePath)
+            signer.capabilities.publish(cap, at: SakutaroPoemReplica.CollectionPublicPath)
         }
         let nft <- SakutaroPoemReplica.mintNFT()
-        let collectionRef = signer.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) ?? panic("Not Found")
+        let collectionRef = signer.storage.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) ?? panic("Not Found")
         collectionRef.deposit(token: <- nft)
     }
 }

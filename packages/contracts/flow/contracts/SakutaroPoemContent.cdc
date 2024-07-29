@@ -7,17 +7,17 @@
 // \____/  \__,_||_|\_\ \__,_| \__| \__,_||_|    \___/
 //
 //
-import Base64Util from "./Base64Util.cdc"
+import "Base64Util"
 
-pub contract SakutaroPoemContent {
-    pub let name: String
-    pub let description: String
-    priv let poems: [Poem]
+access(all) contract SakutaroPoemContent {
+    access(all) let name: String
+    access(all) let description: String
+    access(self) let poems: [Poem]
 
-    pub struct Poem {
-        pub let title: String
-        pub let body: String
-        pub let ipfsCid: String
+    access(all) struct Poem {
+        access(all) let title: String
+        access(all) let body: String
+        access(all) let ipfsCid: String
 
         init(
             title: String,
@@ -29,7 +29,7 @@ pub contract SakutaroPoemContent {
             self.ipfsCid = ipfsCid
         }
 
-        pub fun getSvg(): String {
+        access(all) fun getSvg(): String {
             var svg = ""
             svg = svg.concat("<svg width=\"400\" height=\"400\" viewBox=\"0, 0, 400, 400\" xmlns=\"http://www.w3.org/2000/svg\">")
             svg = svg.concat("<defs><linearGradient id=\"grad1\" x1=\"0%\" y1=\"50%\"><stop offset=\"0%\" stop-color=\"#0f2350\">")
@@ -49,12 +49,12 @@ pub contract SakutaroPoemContent {
             return svg
         }
 
-        pub fun getSvgBase64(): String {
+        access(all) fun getSvgBase64(): String {
             return "data:image/svg+xml;base64,".concat(Base64Util.encode(self.getSvg()))
         }
     }
 
-    pub fun getPoem(_ poemID: UInt32): Poem? {
+    access(all) fun getPoem(_ poemID: UInt32): Poem? {
         return self.poems[poemID]
     }
 

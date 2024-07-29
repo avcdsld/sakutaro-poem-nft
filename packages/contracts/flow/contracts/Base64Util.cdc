@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: Unlicense
 
-pub contract Base64Util {
-    pub fun encodeFromDict(_ dict: {String: String}): String {
+access(all) contract Base64Util {
+    access(all) fun encodeFromDict(_ dict: {String: String}): String {
         let jsonStr = Base64Util.dictToJsonStr(dict)
         return Base64Util.encode(jsonStr)
     }
 
-    pub fun encode(_ str: String): String {
+    access(all) fun encode(_ str: String): String {
         let base64Map: {UInt8: String} = {
             0: "A", 1: "B", 2: "C", 3: "D",
             4: "E", 5: "F", 6: "G", 7: "H",
@@ -46,7 +46,7 @@ pub contract Base64Util {
         return res
     }
 
-    priv fun dictToJsonStr(_ dict: {String: String}): String {
+    access(self) fun dictToJsonStr(_ dict: {String: String}): String {
         var res = "{"
         var flag = false
         for key in dict.keys {
@@ -65,7 +65,7 @@ pub contract Base64Util {
         return res
     }
 
-    priv fun escape(_ str: String): String {
+    access(self) fun escape(_ str: String): String {
         var res = ""
         var i = 0
         while i < str.length {

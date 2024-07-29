@@ -1,13 +1,13 @@
-import SakutaroPoem from "../contracts/SakutaroPoem.cdc"
-import MetadataViews from "../contracts/core/MetadataViews.cdc"
+import "SakutaroPoem"
+import "MetadataViews"
 
-pub fun main(address: Address, id: UInt64): String {
+access(all) fun main(address: Address, id: UInt64): String {
     let collection = getAccount(address)
-        .getCapability(SakutaroPoem.CollectionPublicPath)
-        .borrow<&{SakutaroPoem.SakutaroPoemCollectionPublic}>()
+        .capabilities.get<&SakutaroPoem.Collection>(SakutaroPoem.CollectionPublicPath)
+        .borrow()
         ?? panic("Not Found")
 
-    let nft = collection.borrowPoem(id: id)!
+    let nft = collection.borrowPoem(id)!
     let metadata = nft.resolveView(Type<SakutaroPoem.SakutaroPoemMetadataView>())!
     let poem = metadata as! SakutaroPoem.SakutaroPoemMetadataView
 

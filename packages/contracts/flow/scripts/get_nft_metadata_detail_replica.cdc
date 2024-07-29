@@ -1,9 +1,9 @@
-import SakutaroPoemReplica from "../contracts/SakutaroPoemReplica.cdc"
-import MetadataViews from "../contracts/core/MetadataViews.cdc"
+import "SakutaroPoemReplica"
+import "MetadataViews"
 
-pub struct NFT {
-    pub let owner: Address
-    pub let display: MetadataViews.Display
+access(all) struct NFT {
+    access(all) let owner: Address
+    access(all) let display: MetadataViews.Display
 
     init(
         owner: Address,
@@ -14,13 +14,13 @@ pub struct NFT {
     }
 }
 
-pub fun main(address: Address, id: UInt64): NFT {
+access(all) fun main(address: Address, id: UInt64): NFT {
     let collection = getAccount(address)
-        .getCapability(SakutaroPoemReplica.CollectionPublicPath)
-        .borrow<&{SakutaroPoemReplica.SakutaroPoemReplicaCollectionPublic}>()
+        .capabilities.get<&SakutaroPoemReplica.Collection>(SakutaroPoemReplica.CollectionPublicPath)
+        .borrow()
         ?? panic("Not Found")
 
-    let nft = collection.borrowPoem(id: id)!
+    let nft = collection.borrowPoem(id)!
     let display = nft.resolveView(Type<MetadataViews.Display>())!
 
     return NFT(

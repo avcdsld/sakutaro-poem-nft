@@ -1,10 +1,10 @@
-import NonFungibleToken from "../contracts/core/NonFungibleToken.cdc"
-import SakutaroPoem from "../contracts/SakutaroPoem.cdc"
+import "NonFungibleToken"
+import "SakutaroPoem"
 
-pub fun main(address: Address): Int {
+access(all) fun main(address: Address): Int {
     let collectionRef = getAccount(address)
-        .getCapability(SakutaroPoem.CollectionPublicPath)
-        .borrow<&{NonFungibleToken.CollectionPublic}>()
+        .capabilities.get<&{NonFungibleToken.CollectionPublic}>(SakutaroPoem.CollectionPublicPath)
+        .borrow()
         ?? panic("Not Found")
     return collectionRef.getIDs().length
 }

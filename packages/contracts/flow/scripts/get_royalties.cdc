@@ -1,6 +1,6 @@
-import ExcitingMoments from "../contracts/ExcitingMoments.cdc"
-import MetadataViews from "../contracts/MetadataViews.cdc"
+import "SakutaroPoem"
+import "MetadataViews"
 
-pub fun main(): MetadataViews.Royalties {
-    return ExcitingMoments.getRoyalties()
+access(all) fun main(): MetadataViews.Royalties {
+    return SakutaroPoem.getRoyalties()
 }

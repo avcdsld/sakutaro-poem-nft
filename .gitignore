@@ -130,3 +130,5 @@ packages/contracts/deployments
 
 # Aptos CLI
 .aptos
+
+*.key

@@ -1,15 +1,13 @@
-import NonFungibleToken from "../contracts/core/NonFungibleToken.cdc"
-import SakutaroPoem from "../contracts/SakutaroPoem.cdc"
+import "NonFungibleToken"
+import "SakutaroPoem"
 
 transaction {
-    prepare(signer: AuthAccount) {
-        if signer.borrow<&SakutaroPoem.Collection>(from: SakutaroPoem.CollectionStoragePath) != nil {
+    prepare(signer: auth(BorrowValue, SaveValue, IssueStorageCapabilityController, PublishCapability) &Account) {
+        if signer.storage.borrow<&SakutaroPoem.Collection>(from: SakutaroPoem.CollectionStoragePath) != nil {
             return
         }
-        signer.save(<- SakutaroPoem.createEmptyCollection(), to: SakutaroPoem.CollectionStoragePath)
-        signer.link<&{NonFungibleToken.CollectionPublic, SakutaroPoem.SakutaroPoemCollectionPublic}>(
-            SakutaroPoem.CollectionPublicPath,
-            target: SakutaroPoem.CollectionStoragePath
-        )
+        signer.storage.save(<- SakutaroPoem.createEmptyCollection(nftType: Type<@SakutaroPoem.NFT>()), to: SakutaroPoem.CollectionStoragePath)
+        let cap = signer.capabilities.storage.issue<&SakutaroPoem.Collection>(SakutaroPoem.CollectionStoragePath)
+        signer.capabilities.publish(cap, at: SakutaroPoem.CollectionPublicPath)
     }
 }

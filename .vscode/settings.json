@@ -5,5 +5,6 @@
     "source.fixAll.eslint": "explicit"
   },
   "solidity.packageDefaultDependenciesContractsDirectory": "",
-  "solidity.packageDefaultDependenciesDirectory": "node_modules"
+  "solidity.packageDefaultDependenciesDirectory": "node_modules",
+  "cadence.flowCommand": "flow-c1"
 }

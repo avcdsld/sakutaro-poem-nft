@@ -7,35 +7,30 @@
 // \____/  \__,_||_|\_\ \__,_| \__| \__,_||_|    \___/
 //
 //
-import NonFungibleToken from "./core/NonFungibleToken.cdc"
-import MetadataViews from "./core/MetadataViews.cdc"
-import SakutaroPoemContent from "./SakutaroPoemContent.cdc"
+import "NonFungibleToken"
+import "ViewResolver"
+import "MetadataViews"
+import "SakutaroPoemContent"
 
-pub contract SakutaroPoemReplica: NonFungibleToken {
-    pub let CollectionPublicPath: PublicPath
-    pub let CollectionStoragePath: StoragePath
-    pub var totalSupply: UInt64
+access(all) contract SakutaroPoemReplica: NonFungibleToken {
+    access(all) let CollectionPublicPath: PublicPath
+    access(all) let CollectionStoragePath: StoragePath
+    access(all) var totalSupply: UInt64
 
-    pub event ContractInitialized()
-    pub event Withdraw(id: UInt64, from: Address?)
-    pub event Deposit(id: UInt64, to: Address?)
-    pub event Mint(id: UInt64)
-    pub event Destroy(id: UInt64)
-
-    pub resource NFT: NonFungibleToken.INFT, MetadataViews.Resolver {
-        pub let id: UInt64
+    access(all) resource NFT: NonFungibleToken.NFT {
+        access(all) let id: UInt64
 
         init(id: UInt64) {
             self.id = id
         }
 
-        pub fun getViews(): [Type] {
+        access(all) view fun getViews(): [Type] {
             return [
                 Type<MetadataViews.Display>()
             ]
         }
 
-        pub fun resolveView(_ view: Type): AnyStruct? {
+        access(all) fun resolveView(_ view: Type): AnyStruct? {
             switch view {
                 case Type<MetadataViews.Display>():
                     let poem = self.getPoem()
@@ -48,7 +43,7 @@ pub contract SakutaroPoemReplica: NonFungibleToken {
             return nil
         }
 
-        pub fun getPoemID(): UInt32? {
+        access(all) fun getPoemID(): UInt32? {
             if self.owner == nil {
               return nil
             }
@@ -60,7 +55,7 @@ pub contract SakutaroPoemReplica: NonFungibleToken {
             return num % 39
         }
 
-        pub fun getPoem(): SakutaroPoemContent.Poem? {
+        access(all) fun getPoem(): SakutaroPoemContent.Poem? {
             let poemID = self.getPoemID()
             if poemID == nil {
               return nil
@@ -68,16 +63,16 @@ pub contract SakutaroPoemReplica: NonFungibleToken {
             return SakutaroPoemContent.getPoem(poemID!)
         }
 
-        destroy() {
-            emit Destroy(id: self.id)
+        access(all) fun createEmptyCollection(): @{NonFungibleToken.Collection} {
+            return <- SakutaroPoemReplica.createEmptyCollection(nftType: Type<@SakutaroPoemReplica.NFT>())
         }
     }
 
-    pub resource interface SakutaroPoemReplicaCollectionPublic {
-        pub fun deposit(token: @NonFungibleToken.NFT)
-        pub fun getIDs(): [UInt64]
-        pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT
-        pub fun borrowPoem(id: UInt64): &SakutaroPoemReplica.NFT? {
+    access(all) resource interface SakutaroPoemReplicaCollectionPublic {
+        access(all) fun deposit(token: @{NonFungibleToken.NFT})
+        access(all) view fun getIDs(): [UInt64]
+        access(all) view fun borrowNFT(_ id: UInt64): &{NonFungibleToken.NFT}?
+        access(all) view fun borrowPoem(_ id: UInt64): &SakutaroPoemReplica.NFT? {
             post {
                 (result == nil) || (result?.id == id):
                     "Cannot borrow Poem reference: the ID of the returned reference is incorrect"
@@ -85,65 +80,96 @@ pub contract SakutaroPoemReplica: NonFungibleToken {
         }
     }
 
-    pub resource Collection: SakutaroPoemReplicaCollectionPublic, NonFungibleToken.Provider, NonFungibleToken.Receiver, NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection {
-        pub var ownedNFTs: @{UInt64: NonFungibleToken.NFT}
+    access(all) resource Collection: SakutaroPoemReplicaCollectionPublic, NonFungibleToken.Collection {
+        access(all) var ownedNFTs: @{UInt64: {NonFungibleToken.NFT}}
 
         init () {
             self.ownedNFTs <- {}
         }
 
-        pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
+        access(all) view fun getSupportedNFTTypes(): {Type: Bool} {
+            let supportedTypes: {Type: Bool} = {}
+            supportedTypes[Type<@SakutaroPoemReplica.NFT>()] = true
+            return supportedTypes
+        }
+
+        access(all) view fun isSupportedNFTType(type: Type): Bool {
+            return type == Type<@SakutaroPoemReplica.NFT>()
+        }
+
+        access(NonFungibleToken.Withdraw) fun withdraw(withdrawID: UInt64): @{NonFungibleToken.NFT} {
             let token <- self.ownedNFTs.remove(key: withdrawID) ?? panic("Missing NFT")
-            emit Withdraw(id: token.id, from: self.owner?.address)
             return <- token
         }
 
-        pub fun deposit(token: @NonFungibleToken.NFT) {
+        access(all) fun deposit(token: @{NonFungibleToken.NFT}) {
             let token <- token as! @SakutaroPoemReplica.NFT
             let id: UInt64 = token.id
             let oldToken <- self.ownedNFTs[id] <- token
-            emit Deposit(id: id, to: self.owner?.address)
             destroy oldToken
         }
 
-        pub fun getIDs(): [UInt64] {
+        access(all) view fun getIDs(): [UInt64] {
             return self.ownedNFTs.keys
         }
 
-        pub fun borrowNFT(id: UInt64): &NonFungibleToken.NFT {
-            return (&self.ownedNFTs[id] as &NonFungibleToken.NFT?)!
+        access(all) view fun borrowNFT(_ id: UInt64): &{NonFungibleToken.NFT}? {
+            return &self.ownedNFTs[id] as &{NonFungibleToken.NFT}?
         }
  
-        pub fun borrowPoem(id: UInt64): &SakutaroPoemReplica.NFT? {
+        access(all) view fun borrowPoem(_ id: UInt64): &SakutaroPoemReplica.NFT? {
             if self.ownedNFTs[id] != nil {
-                let ref = &self.ownedNFTs[id] as auth &NonFungibleToken.NFT?
+                let ref = &self.ownedNFTs[id] as &{NonFungibleToken.NFT}?
                 return ref as! &SakutaroPoemReplica.NFT?
             }
             return nil
         }
 
-        pub fun borrowViewResolver(id: UInt64): &AnyResource{MetadataViews.Resolver} {
-            let nft = &self.ownedNFTs[id] as auth &NonFungibleToken.NFT?
-            return nft as! &SakutaroPoemReplica.NFT
+        access(all) view fun borrowViewResolver(id: UInt64): &{ViewResolver.Resolver}? {
+            if let nft = &self.ownedNFTs[id] as &{NonFungibleToken.NFT}? {
+                return nft as &{ViewResolver.Resolver}
+            }
+            return nil
         }
 
-        destroy() {
-            destroy self.ownedNFTs
+        access(all) fun createEmptyCollection(): @{NonFungibleToken.Collection} {
+            return <- SakutaroPoemReplica.createEmptyCollection(nftType: Type<@SakutaroPoemReplica.NFT>())
         }
     }
 
-    pub fun createEmptyCollection(): @NonFungibleToken.Collection {
+    access(all) fun createEmptyCollection(nftType: Type): @{NonFungibleToken.Collection} {
         return <- create Collection()
     }
 
-    pub fun mintNFT() : @NFT {
+    access(all) view fun getContractViews(resourceType: Type?): [Type] {
+        return [
+            Type<MetadataViews.NFTCollectionData>()
+        ]
+    }
+
+    access(all) view fun resolveContractView(resourceType: Type?, viewType: Type): AnyStruct? {
+        switch viewType {
+            case Type<MetadataViews.NFTCollectionData>():
+                let collectionData = MetadataViews.NFTCollectionData(
+                    storagePath: self.CollectionStoragePath,
+                    publicPath: self.CollectionPublicPath,
+                    publicCollection: Type<&SakutaroPoemReplica.Collection>(),
+                    publicLinkedType: Type<&SakutaroPoemReplica.Collection>(),
+                    createEmptyCollectionFunction: (fun(): @{NonFungibleToken.Collection} {
+                        return <- SakutaroPoemReplica.createEmptyCollection(nftType: Type<@SakutaroPoemReplica.NFT>())
+                    })
+                )
+                return collectionData
+        }
+        return nil
+    }
+
+    access(all) fun mintNFT(): @NFT {
         pre {
             SakutaroPoemReplica.totalSupply < 10000: "Can't mint any more"
         }
         SakutaroPoemReplica.totalSupply = SakutaroPoemReplica.totalSupply + 1
-        let token <- create NFT(id: SakutaroPoemReplica.totalSupply)
-        emit Mint(id: token.id)
-        return <- token
+        return <- create NFT(id: SakutaroPoemReplica.totalSupply)
     }
 
     init() {
@@ -151,12 +177,8 @@ pub contract SakutaroPoemReplica: NonFungibleToken {
         self.CollectionStoragePath = /storage/SakutaroPoemReplicaCollection
         self.totalSupply = 0
 
-        self.account.save(<- create Collection(), to: self.CollectionStoragePath)
-        self.account.link<&SakutaroPoemReplica.Collection{NonFungibleToken.CollectionPublic, SakutaroPoemReplica.SakutaroPoemReplicaCollectionPublic}>(
-            self.CollectionPublicPath,
-            target: self.CollectionStoragePath
-        )
-
-        emit ContractInitialized()
+        self.account.storage.save(<- create Collection(), to: self.CollectionStoragePath)
+        let cap: Capability = self.account.capabilities.storage.issue<&SakutaroPoemReplica.Collection>(self.CollectionStoragePath)
+        self.account.capabilities.publish(cap, at: self.CollectionPublicPath)
     }
 }
