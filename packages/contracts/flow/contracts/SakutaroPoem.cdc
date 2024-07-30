@@ -122,6 +122,7 @@ access(all) contract SakutaroPoem: NonFungibleToken {
     access(all) resource interface SakutaroPoemCollectionPublic {
         access(all) fun deposit(token: @{NonFungibleToken.NFT})
         access(all) view fun getIDs(): [UInt64]
+        access(all) view fun getLength(): Int
         access(all) view fun borrowNFT(_ id: UInt64): &{NonFungibleToken.NFT}?
         access(all) view fun borrowPoem(_ id: UInt64): &SakutaroPoem.NFT? {
             post {
@@ -162,6 +163,10 @@ access(all) contract SakutaroPoem: NonFungibleToken {
 
         access(all) view fun getIDs(): [UInt64] {
             return self.ownedNFTs.keys
+        }
+
+        access(all) view fun getLength(): Int {
+            return self.ownedNFTs.length
         }
 
         access(all) view fun borrowNFT(_ id: UInt64): &{NonFungibleToken.NFT}? {
