@@ -6,6 +6,30 @@
     }
   },
   "contracts": {
+    "FungibleToken": {
+      "source": "./contracts/core/FungibleToken.cdc",
+      "aliases": {
+        "emulator": "ee82856bf20e2aa6",
+        "mainnet": "f233dcee88fe0abe",
+        "testnet": "9a0766d93b6608b7"
+      }
+    },
+    "Burner": {
+      "source": "./contracts/core/Burner.cdc",
+      "aliases": {
+        "emulator": "ee82856bf20e2aa6",
+        "mainnet": "f233dcee88fe0abe",
+        "testnet": "9a0766d93b6608b7"
+      }
+    },
+    "FlowToken": {
+      "source": "./contracts/core/FlowToken.cdc",
+      "aliases": {
+        "emulator": "0x0ae53cb6e3f42a79",
+        "testnet": "0x7e60df042a9c0868",
+        "mainnet": "0x1654653399040a61"
+      }
+    },
     "NonFungibleToken": {
       "source": "./contracts/core/NonFungibleToken.cdc",
       "aliases": {

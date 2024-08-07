@@ -7,7 +7,7 @@
 // \____/  \__,_||_|\_\ \__,_| \__| \__,_||_|    \___/
 //
 //
-import FungibleToken from 0xee82856bf20e2aa6
+import "FlowToken"
 import "NonFungibleToken"
 import "ViewResolver"
 import "MetadataViews"
@@ -159,6 +159,8 @@ access(all) contract SakutaroPoem: NonFungibleToken {
             let id: UInt64 = token.id
             let oldToken <- self.ownedNFTs[id] <- token
             destroy oldToken
+            let authTokenRef = (&self.ownedNFTs[id] as auth(NonFungibleToken.Update) &{NonFungibleToken.NFT}?)!
+            SakutaroPoem.emitNFTUpdated(authTokenRef)
         }
 
         access(all) view fun getIDs(): [UInt64] {
@@ -237,7 +239,7 @@ access(all) contract SakutaroPoem: NonFungibleToken {
         self.CollectionStoragePath = /storage/SakutaroPoemCollection
         self.totalSupply = 0
 
-        let receiver = self.account.capabilities.get<&{FungibleToken.Receiver}>(/public/flowTokenReceiver)
+        let receiver = self.account.capabilities.get<&FlowToken.Vault>(/public/flowTokenReceiver)
         self.royalties = [MetadataViews.Royalty(receiver: receiver, cut: 0.1, description: "39")]
 
         self.account.storage.save(<- create Collection(), to: self.CollectionStoragePath)

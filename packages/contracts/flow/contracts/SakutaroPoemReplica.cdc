@@ -108,6 +108,8 @@ access(all) contract SakutaroPoemReplica: NonFungibleToken {
             let id: UInt64 = token.id
             let oldToken <- self.ownedNFTs[id] <- token
             destroy oldToken
+            let authTokenRef = (&self.ownedNFTs[id] as auth(NonFungibleToken.Update) &{NonFungibleToken.NFT}?)!
+            SakutaroPoemReplica.emitNFTUpdated(authTokenRef)
         }
 
         access(all) view fun getIDs(): [UInt64] {
