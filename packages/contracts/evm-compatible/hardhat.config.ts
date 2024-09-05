@@ -120,9 +120,25 @@ module.exports = {
       gas: 2100000,
       gasPrice: 8000000000,
     },
+    soniemtestnet: {
+      url: "https://rpc.minato.soneium.org",
+      accounts: [privateKey],
+      gas: 2100000,
+      gasPrice: 8000000000,
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_KEY,
+    customChains: [
+      {
+        network: "soniemtestnet",
+        chainId: 1946,
+        urls: {
+          apiURL: "https://explorer-testnet.soneium.org/api/",
+          browserURL: "https://explorer-testnet.soneium.org/",
+        },
+      },
+    ],
   },
   mocha: {
     timeout: 50000,
