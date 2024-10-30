@@ -23,7 +23,7 @@
     "@martianwallet/aptos-wallet-adapter": "^0.0.4",
     "@mysten/sui.js": "^0.37.1",
     "@nightlylabs/aptos-wallet-adapter-plugin": "^0.2.12",
-    "@onflow/fcl": "^1.4.1",
+    "@onflow/fcl": "^1.12.3",
     "@pontem/wallet-adapter-plugin": "^0.2.0",
     "@rise-wallet/wallet-adapter": "^0.1.2",
     "@suiet/wallet-kit": "^0.2.15",

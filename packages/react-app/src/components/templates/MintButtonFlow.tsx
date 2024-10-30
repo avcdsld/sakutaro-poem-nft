@@ -57,16 +57,14 @@ import NonFungibleToken from ${nonFungibleTokenAddress}
 import SakutaroPoem from ${sakutaroPoemAddress}
 
 transaction() {
-    prepare(signer: AuthAccount) {
-        if signer.borrow<&SakutaroPoem.Collection>(from: SakutaroPoem.CollectionStoragePath) == nil {
-            signer.save(<- SakutaroPoem.createEmptyCollection(), to: SakutaroPoem.CollectionStoragePath)
-            signer.link<&{NonFungibleToken.CollectionPublic, SakutaroPoem.SakutaroPoemCollectionPublic}>(
-                SakutaroPoem.CollectionPublicPath,
-                target: SakutaroPoem.CollectionStoragePath
-            )
+    prepare(signer: auth(BorrowValue, SaveValue, IssueStorageCapabilityController, PublishCapability) &Account) {
+        if signer.storage.borrow<&SakutaroPoem.Collection>(from: SakutaroPoem.CollectionStoragePath) == nil {
+            signer.storage.save(<- SakutaroPoem.createEmptyCollection(nftType: Type<@SakutaroPoem.NFT>()), to: SakutaroPoem.CollectionStoragePath)
+            let cap = signer.capabilities.storage.issue<&SakutaroPoem.Collection>(SakutaroPoem.CollectionStoragePath)
+            signer.capabilities.publish(cap, at: SakutaroPoem.CollectionPublicPath)
         }
         let nft <- SakutaroPoem.mintNFT()
-        let collectionRef = signer.borrow<&SakutaroPoem.Collection>(from: SakutaroPoem.CollectionStoragePath) ?? panic("Not Found")
+        let collectionRef = signer.storage.borrow<&SakutaroPoem.Collection>(from: SakutaroPoem.CollectionStoragePath) ?? panic("Not Found")
         if collectionRef.getIDs().length > 0 {
             panic("Only one can be minted")
         }
@@ -78,16 +76,14 @@ import NonFungibleToken from ${nonFungibleTokenAddress}
 import SakutaroPoemReplica from ${sakutaroPoemAddress}
 
 transaction() {
-    prepare(signer: AuthAccount) {
-        if signer.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) == nil {
-            signer.save(<- SakutaroPoemReplica.createEmptyCollection(), to: SakutaroPoemReplica.CollectionStoragePath)
-            signer.link<&{NonFungibleToken.CollectionPublic, SakutaroPoemReplica.SakutaroPoemReplicaCollectionPublic}>(
-                SakutaroPoemReplica.CollectionPublicPath,
-                target: SakutaroPoemReplica.CollectionStoragePath
-            )
+    prepare(signer: auth(BorrowValue, SaveValue, IssueStorageCapabilityController, PublishCapability) &Account) {
+        if signer.storage.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) == nil {
+            signer.storage.save(<- SakutaroPoemReplica.createEmptyCollection(nftType: Type<@SakutaroPoemReplica.NFT>()), to: SakutaroPoemReplica.CollectionStoragePath)
+            let cap = signer.capabilities.storage.issue<&SakutaroPoemReplica.Collection>(SakutaroPoemReplica.CollectionStoragePath)
+            signer.capabilities.publish(cap, at: SakutaroPoemReplica.CollectionPublicPath)
         }
         let nft <- SakutaroPoemReplica.mintNFT()
-        let collectionRef = signer.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) ?? panic("Not Found")
+        let collectionRef = signer.storage.borrow<&SakutaroPoemReplica.Collection>(from: SakutaroPoemReplica.CollectionStoragePath) ?? panic("Not Found")
         if collectionRef.getIDs().length > 0 {
             panic("Only one can be minted")
         }
@@ -130,45 +126,47 @@ transaction() {
 import NonFungibleToken from ${nonFungibleTokenAddress}
 import SakutaroPoem from ${sakutaroPoemAddress}
 
-pub fun main(): String {
-  let collectionRef = getAccount(${account!["addr"]})
-      .getCapability(SakutaroPoem.CollectionPublicPath)
-      .borrow<&{SakutaroPoem.SakutaroPoemCollectionPublic}>()
-  if collectionRef == nil {
-      return ""
-  }
-  let ids = collectionRef!.getIDs()
-  if ids.length == 0 {
-      return ""
-  }
+access(all) fun main(): String {
+    let collection = getAccount(${account!["addr"]})
+        .capabilities.get<&SakutaroPoem.Collection>(SakutaroPoem.CollectionPublicPath)
+        .borrow()
+    if collection == nil {
+        return ""
+    }
 
-  let nft = collectionRef!.borrowPoem(id: ids[0])!
-  let metadata = nft.resolveView(Type<SakutaroPoem.SakutaroPoemMetadataView>())!
-  let poem = metadata as! SakutaroPoem.SakutaroPoemMetadataView
+    let ids = collection!.getIDs()
+    if ids.length == 0 {
+        return ""
+    }
 
-  return poem.svgBase64 ?? ""
+    let nft = collection!.borrowPoem(ids[0])!
+    let metadata = nft.resolveView(Type<SakutaroPoem.SakutaroPoemMetadataView>())!
+    let poem = metadata as! SakutaroPoem.SakutaroPoemMetadataView
+
+    return poem.svgBase64 ?? ""
 }`
           : `\
 import NonFungibleToken from ${nonFungibleTokenAddress}
-import SakutaroPoem from ${sakutaroPoemAddress}
+import SakutaroPoemReplica from ${sakutaroPoemAddress}
 
-pub fun main(): String {
-  let collectionRef = getAccount(${account!["addr"]})
-      .getCapability(SakutaroPoem.CollectionPublicPath)
-      .borrow<&{SakutaroPoem.SakutaroPoemCollectionPublic}>()
-  if collectionRef == nil {
-      return ""
-  }
-  let ids = collectionRef!.getIDs()
-  if ids.length == 0 {
-      return ""
-  }
+access(all) fun main(): String {
+    let collection = getAccount(${account!["addr"]})
+        .capabilities.get<&SakutaroPoemReplica.Collection>(SakutaroPoemReplica.CollectionPublicPath)
+        .borrow()
+    if collection == nil {
+        return ""
+    }
 
-  let nft = collectionRef!.borrowPoem(id: ids[0])!
-  let metadata = nft.resolveView(Type<SakutaroPoem.SakutaroPoemMetadataView>())!
-  let poem = metadata as! SakutaroPoem.SakutaroPoemMetadataView
+    let ids = collection!.getIDs()
+    if ids.length == 0 {
+        return ""
+    }
 
-  return poem.svgBase64 ?? ""
+    let nft = collection!.borrowPoem(ids[0])!
+    let metadata = nft.resolveView(Type<SakutaroPoemReplica.SakutaroPoemMetadataView>())!
+    let poem = metadata as! SakutaroPoemReplica.SakutaroPoemMetadataView
+
+    return poem.svgBase64 ?? ""
 }`,
       });
       console.log(svgAsBase64);
@@ -193,13 +191,13 @@ pub fun main(): String {
           ? `\
 import SakutaroPoem from ${sakutaroPoemAddress}
 
-pub fun main(): UInt64 {
+access(all) fun main(): UInt64 {
     return SakutaroPoem.totalSupply
 }`
           : `\
 import SakutaroPoemReplica from ${sakutaroPoemAddress}
 
-pub fun main(): UInt64 {
+access(all) fun main(): UInt64 {
     return SakutaroPoemReplica.totalSupply
 }`,
       })

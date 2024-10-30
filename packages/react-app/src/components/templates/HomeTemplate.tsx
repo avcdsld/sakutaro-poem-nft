@@ -330,8 +330,8 @@ export const HomeTemplate: React.FC = () => {
               network="testnet"
               isReplica={false}
               max={max}
-              explorerUrlPrefix="https://testnet.flowscan.org/transaction/"
-              externalUrl="https://testnet.flowscan.org/contract/A.0ba61bc9eb0b44c8.SakutaroPoem/overview"
+              explorerUrlPrefix="https://testnet.flowdiver.io/tx/"
+              externalUrl="https://testnet.flowdiver.io/contract/A.0ba61bc9eb0b44c8.SakutaroPoem?tab=deployments"
             />
 
             <MintButtonFlow
@@ -340,7 +340,7 @@ export const HomeTemplate: React.FC = () => {
               isReplica={true}
               max={10000}
               explorerUrlPrefix="https://testnet.flowscan.org/transaction/"
-              externalUrl="https://testnet.flowscan.org/contract/A.0ba61bc9eb0b44c8.SakutaroPoemReplica/overview"
+              externalUrl="https://testnet.flowdiver.io/contract/A.0ba61bc9eb0b44c8.SakutaroPoemReplica?tab=deployments"
             /> */}
 
             <MintButtonFlow
@@ -348,9 +348,8 @@ export const HomeTemplate: React.FC = () => {
               network="mainnet"
               isReplica={false}
               max={max}
-              explorerUrlPrefix="https://flowscan.org/transaction/"
-              otherMarketUrl="https://matrixmarket.xyz/collection/mainnet_flow-A.e46c2c24053641e2.SakutaroPoem"
-              externalUrl="https://flowscan.org/contract/A.e46c2c24053641e2.SakutaroPoem/overview"
+              explorerUrlPrefix="https://www.flowdiver.io/tx/"
+              externalUrl="https://www.flowdiver.io/contract/A.e46c2c24053641e2.SakutaroPoem?tab=deployments"
             />
 
             {/* <MintButtonFlow
@@ -358,8 +357,8 @@ export const HomeTemplate: React.FC = () => {
               network="mainnet"
               isReplica={true}
               max={10000}
-              explorerUrlPrefix="https://flowscan.org/transaction/"
-              externalUrl="https://flowscan.org/contract/A.e46c2c24053641e2.SakutaroPoemReplica/overview"
+              explorerUrlPrefix="https://www.flowdiver.io/tx/"
+              externalUrl="https://www.flowdiver.io/contract/A.e46c2c24053641e2.SakutaroPoemReplica?tab=deployments"
             /> */}
 
             {/* <MintButtonTezos
