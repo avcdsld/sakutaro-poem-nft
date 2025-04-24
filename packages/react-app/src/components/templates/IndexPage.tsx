@@ -108,7 +108,8 @@ export const IndexPage: React.FC = () => {
                           この NFT は、複数のブロックチェーン上で発行されます。
                           <br />
                           発行されるチェーンは、Ethereum / Polygon / BSC / Arbitrum / Optimism / Shiden / Avalanche
-                          C-Chain / Flow / Tezos / Sui / Aptos 等です（順次 対応予定）。各チェーン最大 39 枚まで発行できます。
+                          C-Chain / Flow / Tezos / Sui / Aptos 等です（順次 対応予定）。各チェーン最大 39
+                          枚まで発行できます。
                           <br />
                         </p>
                       </div>
@@ -333,7 +334,9 @@ export const IndexPage: React.FC = () => {
                             rel="noopener noreferrer"
                             data-s-218d2ad5-a96d-478b-b0fe-9a5139386091=""
                             className="icon fa fa-twitter sd"
-                          >&nbsp;</a>
+                          >
+                            &nbsp;
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -360,7 +363,9 @@ export const IndexPage: React.FC = () => {
                             rel="noopener noreferrer"
                             data-s-218d2ad5-a96d-478b-b0fe-9a5139386091=""
                             className="icon fa fa-github sd"
-                          >&nbsp;</a>
+                          >
+                            &nbsp;
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -421,7 +426,7 @@ export const IndexPage: React.FC = () => {
                     maxWidth: "100%",
                   }}
                 >
-                  <a href="https://sakutaro-poem-nft.web.app/en" className="text sd text-white">
+                  <a href="https://sakutaro.poesy.run/en" className="text sd text-white">
                     EN
                     <FontAwesomeIcon className="ml-2" icon={faLanguage} color="white" />
                   </a>

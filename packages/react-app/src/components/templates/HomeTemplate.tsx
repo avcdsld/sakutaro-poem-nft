@@ -374,7 +374,7 @@ export const HomeTemplate: React.FC = () => {
               network="mainnet"
               max={max}
               explorerUrlPrefix="https://tzkt.io/"
-              otherMarketUrl="https://rarible.com/sakutaro-poem-tezos/"
+              otherMarketUrl="https://objkt.com/tokens?search=KT1XPhLUDWuxvUkjraT73TcLGHjUPiUmbCvx"
               externalUrl="https://tzkt.io/KT1XPhLUDWuxvUkjraT73TcLGHjUPiUmbCvx/tokens"
             />
 
@@ -391,9 +391,9 @@ export const HomeTemplate: React.FC = () => {
               label="Sui"
               network="mainnet"
               max={max}
-              explorerUrlPrefix="https://explorer.sui.io/"
+              explorerUrlPrefix="https://suiscan.xyz/mainnet/"
               otherMarketUrl=""
-              externalUrl="https://suiexplorer.com/object/0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1?module=sakutaro_poem"
+              externalUrl="https://suiscan.xyz/mainnet/collection/0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1::sakutaro_poem::SakutaroPoem/items"
             />
 
             {/* <MintButtonAptos
