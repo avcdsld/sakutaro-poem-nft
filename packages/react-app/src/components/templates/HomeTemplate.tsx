@@ -123,7 +123,6 @@ export const HomeTemplate: React.FC = () => {
               }}
               jsonRpcProvider={new ethers.providers.JsonRpcProvider("https://bsc-dataseed.binance.org")}
               explorerUrlPrefix="https://bscscan.com/tx/"
-              openseaUrl="https://opensea.io/ja/collection/sakutaro-poem-bnb"
               externalUrl="https://bscscan.com/address/0xa87abf6854207075e65d16cf86a8ece1216ea973#code"
             />
             {/* <MintButton
