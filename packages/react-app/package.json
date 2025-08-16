@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .ts,.tsx .",
-    "dev": "NODE_OPTIONS='--openssl-legacy-provider' craco start",
-    "build": "NODE_OPTIONS='--openssl-legacy-provider' craco build",
-    "test": "NODE_OPTIONS='--openssl-legacy-provider' craco test"
+    "dev": "craco start",
+    "build": "craco build",
+    "test": "craco test"
   },
   "dependencies": {
     "@airgap/beacon-sdk": "^3.3.0",
@@ -16,6 +16,7 @@
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "@craco/craco": "^7.1.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
