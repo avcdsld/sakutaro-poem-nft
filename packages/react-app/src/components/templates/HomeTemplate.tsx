@@ -19,9 +19,9 @@ export const HomeTemplate: React.FC = () => {
 
   return (
     <>
-      <div className="main text-white bg-black">
-        <div className="p-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+      <div className="main text-white bg-transparent">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-7xl mx-auto">
             {/* <ComingSoonButton label="Ethereum" max={max} /> */}
             <MintButton
               chainId={1}

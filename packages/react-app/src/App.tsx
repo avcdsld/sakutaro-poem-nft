@@ -3,7 +3,6 @@ import Home from "./pages/index";
 import HomeEn from "./pages/en";
 
 import "./styles/tailwind.css";
-import "./styles/font.css";
 
 function App() {
   return (

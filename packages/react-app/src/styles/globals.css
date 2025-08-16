@@ -1,21 +1,322 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700&family=Noto+Serif+JP:wght@200;300;400;500;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: black;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  font-feature-settings: "palt";
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .wallet-button {
-  height: 40px !important;
-
-  background-color:red !important;
+  height: auto !important;
+  min-height: 60px !important;
+  background: linear-gradient(
+    135deg,
+    rgba(120, 119, 198, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(120, 119, 198, 0.15) 100%
+  ) !important;
   width: 100% !important;
-  border-radius: 0.75rem !important;
-  border-width: 0 !important;
-
-  background-color: rgb(239 68 68 / 1) !important;
+  border-radius: 1rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(16px) !important;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.025em !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
 }
+
+.wallet-button::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(120, 119, 198, 0.1) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  ) !important;
+  opacity: 0 !important;
+  transition: all 0.5s ease !important;
+  z-index: 1 !important;
+}
+
+.wallet-button::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%) !important;
+  border-radius: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  transition: all 0.6s ease !important;
+  z-index: 1 !important;
+}
+
+.wallet-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.2) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(139, 92, 246, 0.2) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 20px rgba(139, 92, 246, 0.3) !important;
+}
+
+.wallet-button:hover::before {
+  opacity: 1 !important;
+}
+
+.wallet-button:hover::after {
+  width: 200px !important;
+  height: 200px !important;
+}
+
 .wallet-button span {
-  color:rgb(255 255 255 / 1) !important;
+  color: rgb(255 255 255 / 1) !important;
+  font-weight: inherit !important;
+  position: relative !important;
+  z-index: 2 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.wallet-button:active {
+  transform: translateY(0) scale(0.97) !important;
+  transition: all 0.1s ease !important;
+}
+
+.wallet-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4), 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+button {
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.15) 0%,
+    rgba(168, 85, 247, 0.15) 50%,
+    rgba(59, 130, 246, 0.15) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(20px) !important;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+  cursor: pointer !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+button::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+  transition: left 0.5s ease !important;
+  z-index: 1 !important;
+}
+
+button::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.1) 0%,
+    rgba(168, 85, 247, 0.1) 50%,
+    rgba(59, 130, 246, 0.1) 100%
+  ) !important;
+  opacity: 0 !important;
+  transition: all 0.4s ease !important;
+  z-index: 1 !important;
+}
+
+button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(236, 72, 153, 0.25) 0%,
+    rgba(168, 85, 247, 0.25) 50%,
+    rgba(59, 130, 246, 0.25) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 0 30px rgba(168, 85, 247, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+button:hover::before {
+  left: 100% !important;
+}
+
+button:hover::after {
+  opacity: 1 !important;
+}
+
+button:active {
+  transform: translateY(0) scale(0.98) !important;
+  transition: all 0.15s ease !important;
+}
+
+button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.5), 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+button:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+button:disabled:hover {
+  transform: none !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+.elegant-button {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(12px) !important;
+  transition: all 0.3s ease !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.025em !important;
+  position: relative !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+  cursor: pointer !important;
+}
+
+.elegant-button::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  z-index: 1 !important;
+}
+
+.elegant-button:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.elegant-button:hover::before {
+  opacity: 1 !important;
+}
+
+.elegant-button:active {
+  transform: translateY(0) !important;
+  transition: all 0.1s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.elegant-button:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3), 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+.elegant-button:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+.elegant-button:disabled:hover {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  transform: none !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1) !important;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+}
+
+.poetry-text {
+  font-family: "Noto Serif JP", "Times New Roman", serif;
+  font-weight: 300;
+  line-height: 2.2;
+  letter-spacing: 0.1em;
+}
+
+.quote-text {
+  color: #ffffff !important;
+}
+
+.quote-text p {
+  color: #ffffff !important;
+}
+
+.chain-list {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.chain-list li {
+  color: rgba(255, 255, 255, 0.8) !important;
 }

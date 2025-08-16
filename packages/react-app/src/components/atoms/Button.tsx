@@ -10,7 +10,15 @@ export interface ButtonProps {
   onClick?: () => void;
 }
 
-export const Button: React.FC<ButtonProps> = ({ color, textColor, children, rounded, disabled, className, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({
+  color,
+  textColor,
+  children,
+  rounded,
+  disabled,
+  className,
+  onClick,
+}) => {
   const colorClassName =
     color === "gray"
       ? "bg-gray-400"
@@ -28,7 +36,7 @@ export const Button: React.FC<ButtonProps> = ({ color, textColor, children, roun
 
   return (
     <button
-      className={`w-full p-3 focus:outline-none text-center ${textColorClassName} ${colorClassName} ${roundedClassName} ${disabledClassName} ${className}`}
+      className={`elegant-button w-full p-3 focus:outline-none text-center ${textColorClassName} ${roundedClassName} ${disabledClassName} ${className}`}
       disabled={disabled}
       type="button"
       onClick={onClick}
