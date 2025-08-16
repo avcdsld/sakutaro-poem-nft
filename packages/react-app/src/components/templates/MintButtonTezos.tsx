@@ -25,8 +25,8 @@ export const MintButtonTezos: React.FC<{
   const [totalNumber, setTotalNumber] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
   const [txId, setTxId] = React.useState("");
-  const [Modal,] = useModal("root", { preventScroll: true });
-  const [svgBase64,] = React.useState("");
+  const [Modal] = useModal("root", { preventScroll: true });
+  const [svgBase64] = React.useState("");
 
   const Tezos = new TezosToolkit(
     // rpc nodes: https://tezostaquito.io/docs/rpc_nodes
@@ -128,7 +128,7 @@ export const MintButtonTezos: React.FC<{
         {Number(totalNumber) >= Number(props.max) ? (
           <div className="m-auto p-4">
             <Text align="center" color="light-gray" className="mt-3 mb-3">
-              Sold Out
+              All minted
             </Text>
           </div>
         ) : (

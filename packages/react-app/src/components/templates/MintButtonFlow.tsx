@@ -219,7 +219,7 @@ access(all) fun main(): UInt64 {
         {Number(totalNumber) >= Number(props.max) ? (
           <div className="m-auto p-4">
             <Text align="center" color="light-gray" className="mt-3 mb-3">
-              Sold Out
+              All minted
             </Text>
           </div>
         ) : (

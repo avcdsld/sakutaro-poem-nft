@@ -18,11 +18,7 @@ export const MintButtonAptos: React.FC<{
   externalUrl?: string;
 }> = (props) => {
   const provider = new Provider(props.network === "mainnet" ? Network.MAINNET : Network.DEVNET);
-  const {
-    account,
-    connected,
-    signAndSubmitTransaction,
-  } = useWallet();
+  const { account, connected, signAndSubmitTransaction } = useWallet();
   const [showConnectModal, setShowConnectModal] = React.useState(false);
   const [totalNumber, setTotalNumber] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
@@ -30,9 +26,10 @@ export const MintButtonAptos: React.FC<{
   const [Modal, open] = useModal("root", { preventScroll: true });
   const [svgBase64, setSvgBase64] = React.useState("");
 
-  const sakutaroPoemModuleAddress = props.network === "mainnet" ?
-    "0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d" :
-    "0xc567f3711009f9d00a42b2e0852ddbd27a3492be74f3fef67eb5affda34dddfd";
+  const sakutaroPoemModuleAddress =
+    props.network === "mainnet"
+      ? "0x718f20ae37f309e0aa59fcbe38eb731b73f01aa1459a01d1e157f347c3c6db6d"
+      : "0xc567f3711009f9d00a42b2e0852ddbd27a3492be74f3fef67eb5affda34dddfd";
 
   const mint = async () => {
     try {
@@ -46,7 +43,7 @@ export const MintButtonAptos: React.FC<{
       };
       const response = await signAndSubmitTransaction(payload);
       await provider.waitForTransaction(response.hash);
-      console.log('success', response);
+      console.log("success", response);
       setTxId(response.hash);
 
       setLoading(false);
@@ -64,14 +61,16 @@ export const MintButtonAptos: React.FC<{
       }
 
       const tokens = await provider.getOwnedTokens(account?.address);
-      const tokensProperties = tokens.current_token_ownerships_v2.filter(token => {
-        const collection = token.current_token_data?.current_collection;
-        return (
-          collection &&
-          collection.collection_name === "Sakutaro Poem" &&
-          collection.creator_address === sakutaroPoemModuleAddress
-        )
-      }).map(token => token.current_token_data?.token_properties);
+      const tokensProperties = tokens.current_token_ownerships_v2
+        .filter((token) => {
+          const collection = token.current_token_data?.current_collection;
+          return (
+            collection &&
+            collection.collection_name === "Sakutaro Poem" &&
+            collection.creator_address === sakutaroPoemModuleAddress
+          );
+        })
+        .map((token) => token.current_token_data?.token_properties);
       if (tokensProperties.length === 0) {
         console.log("there is no nft");
         return;
@@ -97,11 +96,11 @@ export const MintButtonAptos: React.FC<{
         `${sakutaroPoemModuleAddress}::sakutaro_poem::ModuleData`
       );
       console.log(moduleDataResource);
-      const totalNumber = moduleDataResource.data["token_minting_events"].counter
+      const totalNumber = moduleDataResource.data["token_minting_events"].counter;
       setTotalNumber(totalNumber);
     } catch (e) {
       console.log(e);
-      setTotalNumber('-');
+      setTotalNumber("-");
     }
   };
 
@@ -119,13 +118,13 @@ export const MintButtonAptos: React.FC<{
         {Number(totalNumber) >= Number(props.max) ? (
           <div className="m-auto p-4">
             <Text align="center" color="light-gray" className="mt-3 mb-3">
-              Sold Out
+              All minted
             </Text>
           </div>
         ) : (
           <>
             <div className="m-auto p-4">
-              <div style={{display: "none"}}>
+              <div style={{ display: "none" }}>
                 <WalletSelector isModalOpen={showConnectModal} setModalOpen={setShowConnectModal} />
               </div>
               {!connected ? (
@@ -141,7 +140,11 @@ export const MintButtonAptos: React.FC<{
                 <>
                   <div className="mt-5">
                     {props.explorerUrlPrefix ? (
-                      <a href={props.explorerUrlPrefix + 'txn/' + txId + `?network=${props.network}`} target="_blank" rel="noreferrer">
+                      <a
+                        href={props.explorerUrlPrefix + "txn/" + txId + `?network=${props.network}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <Text align="center" className="underline" color="white">
                           View Tx
                         </Text>

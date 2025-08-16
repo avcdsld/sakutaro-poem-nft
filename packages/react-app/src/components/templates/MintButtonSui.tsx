@@ -16,8 +16,9 @@ export const MintButtonSui: React.FC<{
   otherMarketUrl?: string;
   externalUrl?: string;
 }> = (props) => {
-  const provider = new JsonRpcProvider(props.network === 'mainnet' ?
-    new Connection({ fullnode: 'https://rpc.mainnet.sui.io/' }) : undefined);
+  const provider = new JsonRpcProvider(
+    props.network === "mainnet" ? new Connection({ fullnode: "https://rpc.mainnet.sui.io/" }) : undefined
+  );
   const { connected, account, signAndExecuteTransactionBlock } = useWallet();
   const [showConnectModal, setShowConnectModal] = React.useState(false);
   const [totalNumber, setTotalNumber] = React.useState("");
@@ -26,12 +27,14 @@ export const MintButtonSui: React.FC<{
   const [Modal, open] = useModal("root", { preventScroll: true });
   const [svgBase64, setSvgBase64] = React.useState("");
 
-  const sakutaroPoemPackageID = props.network === "mainnet" ?
-    "0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1" :
-    "0x82bd7c22a07b14bdb05227a0b7e2c767bb983f4adcbf8b76a1be80fbec793578";
-  const sakutaroPoemSupplyID = props.network === "mainnet" ?
-    "0xdf35ed2fcc90bc1b1281e43461c9cc0ccad7456d8e9646e6d5de09076e8e5156" :
-    "0x61697201431897d30fa1e083f3168ed1a8cb0d7e7b76d82a7154b07cc4863f5c";
+  const sakutaroPoemPackageID =
+    props.network === "mainnet"
+      ? "0x5b7964cf132015d66a79cfa248789204389e7fa7af0b8c4cb75a6b03c5877ea1"
+      : "0x82bd7c22a07b14bdb05227a0b7e2c767bb983f4adcbf8b76a1be80fbec793578";
+  const sakutaroPoemSupplyID =
+    props.network === "mainnet"
+      ? "0xdf35ed2fcc90bc1b1281e43461c9cc0ccad7456d8e9646e6d5de09076e8e5156"
+      : "0x61697201431897d30fa1e083f3168ed1a8cb0d7e7b76d82a7154b07cc4863f5c";
 
   const mint = async () => {
     try {
@@ -42,9 +45,9 @@ export const MintButtonSui: React.FC<{
         target: `${sakutaroPoemPackageID}::sakutaro_poem::mint`,
         arguments: [tx.pure(sakutaroPoemSupplyID)],
       });
-      const input: any = { transactionBlock: tx }
+      const input: any = { transactionBlock: tx };
       const resData = await signAndExecuteTransactionBlock(input);
-      console.log('success', resData);
+      console.log("success", resData);
       setTxId(resData.digest);
 
       setLoading(false);
@@ -64,20 +67,20 @@ export const MintButtonSui: React.FC<{
       const objects = await provider.getOwnedObjects({
         owner: account?.address,
         filter: {
-          StructType: structType
+          StructType: structType,
         },
         options: {
           showType: true,
           showContent: true,
           showDisplay: true,
-        }
-      })
+        },
+      });
       console.log(objects);
       if (!objects || !objects.data || objects.data.length === 0) {
         return;
       }
 
-      const svgBase64 = objects.data[0].data?.display?.data!['animation_url'];
+      const svgBase64 = objects.data[0].data?.display?.data!["animation_url"];
       console.log(svgBase64);
       setSvgBase64(svgBase64);
       open();
@@ -97,14 +100,14 @@ export const MintButtonSui: React.FC<{
         options: {
           showType: true,
           showContent: true,
-        }
-      })
+        },
+      });
       console.log(object, object.data?.content!);
       const content: any = object.data?.content;
-      const totalNumber = content.fields['total_supply'];
+      const totalNumber = content.fields["total_supply"];
       setTotalNumber(totalNumber);
     } catch (e) {
-      setTotalNumber('-');
+      setTotalNumber("-");
     }
   };
 
@@ -122,17 +125,14 @@ export const MintButtonSui: React.FC<{
         {Number(totalNumber) >= Number(props.max) ? (
           <div className="m-auto p-4">
             <Text align="center" color="light-gray" className="mt-3 mb-3">
-              Sold Out
+              All minted
             </Text>
           </div>
         ) : (
           <>
             <div className="m-auto p-4">
               {!connected ? (
-                <ConnectModal
-                  open={showConnectModal}
-                  onOpenChange={(open) => setShowConnectModal(open)}
-                >
+                <ConnectModal open={showConnectModal} onOpenChange={(open) => setShowConnectModal(open)}>
                   <Button color="red" rounded={true}>
                     Connect Wallet
                   </Button>
@@ -146,7 +146,13 @@ export const MintButtonSui: React.FC<{
                 <>
                   <div className="mt-5">
                     {props.explorerUrlPrefix ? (
-                      <a href={props.explorerUrlPrefix + 'txblock/' + txId + `?module=sakutaro_poem&network=${props.network}`} target="_blank" rel="noreferrer">
+                      <a
+                        href={
+                          props.explorerUrlPrefix + "txblock/" + txId + `?module=sakutaro_poem&network=${props.network}`
+                        }
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <Text align="center" className="underline" color="white">
                           View Tx
                         </Text>
