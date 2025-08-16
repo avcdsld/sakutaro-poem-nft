@@ -4,7 +4,7 @@ import { faLanguage } from "@fortawesome/free-solid-svg-icons";
 
 export const IndexPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 font-japanese">
       {/* Header */}
       <header
         className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-md border-b border-white/10"
@@ -29,7 +29,7 @@ export const IndexPage: React.FC = () => {
             className="flex items-center space-x-2 text-white/80 hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-3 py-2 rounded-lg backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-white/50"
             aria-label="英語版に切り替え"
           >
-            <span className="font-medium">EN</span>
+            <span className="text-white/80 font-medium">EN</span>
             <FontAwesomeIcon icon={faLanguage} aria-hidden="true" />
           </a>
         </nav>
@@ -81,9 +81,8 @@ export const IndexPage: React.FC = () => {
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 hover:bg-white/10 transition-all duration-500">
             <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide text-center">
               萩原朔太郎の晩年の自選集『宿命』より 39 篇の詩が、フルオンチェーンの NFT
-              としてブロックチェーン上に刻まれました。この NFT は、
-              <span className="text-white font-medium">持ち主によって中身が変化する</span>
-              という、ちょっと変わった性質を持っています。
+              としてブロックチェーン上に刻まれました。この NFT
+              は、持ち主によって中身が変化するという、少し変わった性質を持っています。
             </p>
           </div>
         </div>
@@ -107,12 +106,12 @@ export const IndexPage: React.FC = () => {
               <div className="mb-8">
                 <ul className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide text-center space-y-1 chain-list">
                   <li>Ethereum / Polygon / BSC / Arbitrum / Optimism / Shiden</li>
-                  <li>Avalanche C-Chain / Flow / Tezos / Sui / Aptos</li>
+                  <li>Avalanche C-Chain / Flow / Tezos / Sui / Aptos / Filecoin</li>
                 </ul>
               </div>
 
               <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                各チェーン最大 <span className="text-white font-medium">39枚</span> まで発行できます。
+                各チェーン最大 39 枚まで発行できます。
               </p>
             </div>
           </div>
@@ -131,14 +130,17 @@ export const IndexPage: React.FC = () => {
           <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 hover:bg-white/10 transition-all duration-500">
             <div className="space-y-6 text-center">
               <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                萩原朔太郎の文学作品が好きです。
+                萩原朔太郎の文学作品には特別な思い入れがあります。
               </p>
               <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                これに付加価値をつけて、長くデジタル空間に残すためにはどうしたらよいだろう。
+                これに付加価値をつけ、長くデジタル空間に残すためにはどうしたらよいだろう。
               </p>
               <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                NFTの規格やSVGデータはどれほど永続的なものだろうか。長く残るにはどのチェーンを使えばよいだろうか。
+                NFTの規格やSVGデータはどれほど永続的なものだろうか。
                 <br />
+                長く残るにはどのチェーンを使えばよいだろうか。
+              </p>
+              <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
                 これは、何年も先の未来を見据えた実験です。
               </p>
             </div>
@@ -166,12 +168,8 @@ export const IndexPage: React.FC = () => {
               "/assets/s-1024x1024_v-fs_webp_c0e4fc72-1ee1-42cb-bd42-c7991c87e2bd_small.webp",
               "/assets/s-1024x1024_v-fs_webp_3834921f-236a-437c-894a-56a8f4e5804b_small.webp",
             ].map((src, index) => (
-              <div
-                key={index}
-                className="group relative bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105"
-              >
+              <div key={index} className="hover:scale-105 transition-transform duration-300">
                 <img src={src} alt={`萩原朔太郎の詩 NFT ${index + 1}`} className="w-full h-auto" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
             ))}
           </div>
@@ -193,12 +191,10 @@ export const IndexPage: React.FC = () => {
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-all duration-500">
               <div className="space-y-6">
                 <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                  <span className="text-white font-medium">画像を含むすべてのメタデータ</span>
-                  はオンチェーンに格納されています。
+                  画像を含むすべてのメタデータはオンチェーンに格納されています。
                 </p>
                 <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                  <span className="text-white font-medium">所有者のアドレス</span>
-                  によって、どの詩になるかが決定されます。
+                  所有者のアドレスによって、どの詩になるか決定されます。
                 </p>
               </div>
             </div>
@@ -226,13 +222,13 @@ export const IndexPage: React.FC = () => {
           <div className="bg-gradient-to-r from-white/5 via-white/10 to-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 mb-12">
             <div className="text-center space-y-6">
               <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                NFT の発行は<span className="text-white/80 font-medium">無料</span>です（Gas 代は必要となります）。
+                NFT の発行は無料です。ただし、Gas 代は必要です。
               </p>
               <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                チェーンごとに <span className="text-white/80 font-medium">1人1つまで</span> でお願いいたします。
+                チェーンごとに、1人1つまでのご協力をお願いいたします。
               </p>
               <p className="text-lg md:text-xl text-white/80 leading-relaxed font-light tracking-wide">
-                NFT のビューアがまだ存在しないチェーンもあります。この点ご承知おきください。
+                NFT のビューアがまだ存在しないチェーンもあります。ご承知おきください。
               </p>
             </div>
           </div>
@@ -284,7 +280,7 @@ export const IndexPage: React.FC = () => {
               className="flex items-center space-x-3 text-white/70 hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm"
             >
               <i className="fa fa-twitter text-xl"></i>
-              <span className="font-medium">X</span>
+              <span className="text-white/70 font-medium">X</span>
             </a>
 
             <a
@@ -294,7 +290,7 @@ export const IndexPage: React.FC = () => {
               className="flex items-center space-x-3 text-white/70 hover:text-white transition-colors duration-300 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-lg backdrop-blur-sm"
             >
               <i className="fa fa-github text-xl"></i>
-              <span className="font-medium">GitHub</span>
+              <span className="text-white/70 font-medium">GitHub</span>
             </a>
           </div>
 
@@ -310,7 +306,7 @@ export const IndexPage: React.FC = () => {
               <div className="w-4 h-4 border-2 border-current rounded-full flex items-center justify-center">
                 <div className="w-1 h-1 bg-current rounded-full"></div>
               </div>
-              <span>Back to the top</span>
+              <span className="text-white/60 font-medium">Back to the top</span>
             </a>
           </div>
         </div>

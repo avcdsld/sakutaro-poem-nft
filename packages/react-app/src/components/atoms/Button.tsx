@@ -19,17 +19,6 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   onClick,
 }) => {
-  const colorClassName =
-    color === "gray"
-      ? "bg-gray-400"
-      : color === "green"
-      ? "bg-green-500"
-      : color === "red"
-      ? "bg-red-500"
-      : color === "pink"
-      ? "bg-red-400"
-      : color;
-
   const textColorClassName = textColor || "text-white";
   const roundedClassName = rounded ? "rounded-xl" : "";
   const disabledClassName = disabled ? "opacity-25" : "hover:opacity-95";
